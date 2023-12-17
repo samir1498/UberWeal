@@ -1,4 +1,4 @@
-package com.samir.uberweal.domain.customer;
+package com.samir.uberweal.core.domain.entities.customer;
 
 import java.util.HashMap;
 import java.util.Map;

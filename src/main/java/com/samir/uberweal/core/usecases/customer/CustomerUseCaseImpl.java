@@ -1,13 +1,16 @@
-package com.samir.uberweal.domain.customer;
+package com.samir.uberweal.core.usecases.customer;
 
 
-import com.samir.uberweal.domain.ride.CustomerNotFoundException;
+import com.samir.uberweal.core.domain.entities.customer.Customer;
+import com.samir.uberweal.core.domain.entities.customer.CustomerRepositoryStub;
+import com.samir.uberweal.core.domain.exceptions.InsufficientFundsException;
+import com.samir.uberweal.core.domain.exceptions.CustomerNotFoundException;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;
 
 @AllArgsConstructor
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerUseCaseImpl implements CustomerUseCase {
 
     private final CustomerRepositoryStub repositoryStub;
 
