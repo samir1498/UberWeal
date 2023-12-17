@@ -22,11 +22,5 @@ public class Customer {
         return (this.funds - amount) >= 0;
     }
 
-    public static interface CustomerRepository {
-
-        Customer save(Customer customer);
-        Optional<Customer> findRiderById(Long Id);
-
-    }
 }
 
