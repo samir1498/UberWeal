@@ -3,6 +3,7 @@ package com.samir.uberweal.core.usecases.ride;
 import com.samir.uberweal.core.domain.entities.customer.Customer;
 import com.samir.uberweal.core.domain.entities.driver.Driver;
 import com.samir.uberweal.core.domain.entities.ride.Ride;
+import com.samir.uberweal.core.domain.repositories.ride.RideRepository;
 import com.samir.uberweal.core.usecases.customer.CustomerUseCase;
 import lombok.RequiredArgsConstructor;
 
@@ -11,6 +12,8 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class RideUseCaseImpl implements RideUseCase {
 
+
+    private final RideRepository rideRepository;
     private final CustomerUseCase customerUseCase;
 
     @Override
@@ -23,6 +26,7 @@ public class RideUseCaseImpl implements RideUseCase {
         }
 
         customerUseCase.preAuthorize(customer, price);
+        rideRepository.save(ride);
 
         return ride;
     }

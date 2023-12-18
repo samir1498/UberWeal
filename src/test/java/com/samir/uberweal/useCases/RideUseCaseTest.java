@@ -8,6 +8,8 @@ import com.samir.uberweal.core.domain.entities.location.Location;
 import com.samir.uberweal.core.domain.entities.ride.Ride;
 import com.samir.uberweal.core.domain.entities.ride.RideStatus;
 import com.samir.uberweal.core.domain.entities.ride.RideType;
+import com.samir.uberweal.core.domain.repositories.ride.RideRepository;
+import com.samir.uberweal.core.domain.repositories.ride.RideRepositoryStub;
 import com.samir.uberweal.core.usecases.customer.CustomerUseCaseImpl;
 import com.samir.uberweal.core.usecases.ride.RideUseCase;
 import com.samir.uberweal.core.usecases.ride.RideUseCaseImpl;
@@ -34,7 +36,8 @@ public class RideUseCaseTest {
     void setUp() {
         CustomerRepositoryStub riderRepositoryStub = new CustomerRepositoryStub();
         CustomerUseCaseImpl customerUseCase = new CustomerUseCaseImpl(riderRepositoryStub);
-        underTest = new RideUseCaseImpl(customerUseCase);
+        RideRepository rideRepository = new RideRepositoryStub();
+        underTest = new RideUseCaseImpl(rideRepository, customerUseCase);
         completionObserver = new RideCompletionObserverImpl(underTest, customerUseCase);
 
         customer = Customer
