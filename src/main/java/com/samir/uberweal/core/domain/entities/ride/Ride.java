@@ -2,9 +2,12 @@ package com.samir.uberweal.core.domain.entities.ride;
 
 import com.samir.uberweal.core.domain.entities.driver.Driver;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.samir.uberweal.core.domain.entities.customer.Customer;
+import com.samir.uberweal.core.domain.entities.location.Location;
+import com.samir.uberweal.core.domain.observers.RideCompletionObserver;
 import lombok.Builder;
 import lombok.Data;
 
@@ -20,30 +23,27 @@ public class Ride {
     @Builder.Default
     private double price = -1;
     private double distance;
+    private RideStatus status;
+    @Builder.Default
+    private List<RideCompletionObserver> completionObservers = new ArrayList<>();
 
-    public void calculatePrice() {
-        boolean isRiderInParis = this.getStartingPoint().getName().equals("Paris");
-        boolean isDestinationParis = this.getDestination().getName().equals("Paris");
+    public void addObserver(RideCompletionObserver observer) {
+        completionObservers.add(observer);
+    }
 
-        switch (this.getRideType()) {
-            case TRIP -> this.setPrice(
-                    (isRiderInParis && !isDestinationParis) ? 30 :
-                            (!isRiderInParis && !isDestinationParis) ? 50 : -1
-            );
-
-            case JOURNEY -> this.setPrice(
-                    (!isRiderInParis && isDestinationParis) ? 0 :
-                            (isRiderInParis && isDestinationParis) ? 10 : -1
-            );
-            default -> this.setPrice(-1);
+    private void notifyObservers() {
+        for (RideCompletionObserver observer : completionObservers) {
+            observer.rideCompleted(this);
         }
+    }
 
-        LocalDate joinedAt = customer.getJoinedAt();
-        LocalDate today = LocalDate.now();
-        if(joinedAt.plusYears(1).isBefore(today)) {
-        	this.setPrice(getPrice()/2);
-        }
+    // Public method to trigger completion and notify observers
+    public void completeRide() {
+        // Assuming there's a method to complete the ride
+        setStatus(RideStatus.COMPLETED);
 
+        // Notify observers
+        notifyObservers();
     }
 
 }

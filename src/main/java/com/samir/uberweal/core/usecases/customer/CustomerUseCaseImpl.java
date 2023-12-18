@@ -2,7 +2,7 @@ package com.samir.uberweal.core.usecases.customer;
 
 
 import com.samir.uberweal.core.domain.entities.customer.Customer;
-import com.samir.uberweal.core.domain.entities.customer.CustomerRepositoryStub;
+import com.samir.uberweal.core.domain.repositories.customer.CustomerRepositoryStub;
 import com.samir.uberweal.core.domain.exceptions.InsufficientFundsException;
 import com.samir.uberweal.core.domain.exceptions.CustomerNotFoundException;
 import lombok.AllArgsConstructor;

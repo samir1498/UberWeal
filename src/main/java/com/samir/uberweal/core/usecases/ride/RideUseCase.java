@@ -8,5 +8,8 @@ import com.samir.uberweal.core.domain.entities.ride.Ride;
 
 public interface RideUseCase {
     Ride bookRide(Customer customer, Driver driver, Ride ride);
+    double calculateExpectedCharge(Ride ride);
+
+
 }
 

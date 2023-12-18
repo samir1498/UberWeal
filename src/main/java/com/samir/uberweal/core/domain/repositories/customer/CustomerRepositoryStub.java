@@ -1,4 +1,6 @@
-package com.samir.uberweal.core.domain.entities.customer;
+package com.samir.uberweal.core.domain.repositories.customer;
+
+import com.samir.uberweal.core.domain.entities.customer.Customer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +12,7 @@ public class CustomerRepositoryStub implements CustomerRepository {
     private long currentId = 1;
 
     @Override
-    public Customer save(Customer customer) {
+    public void save(Customer customer) {
         // Assign an ID if the Rider is new
         if (customer.getId() == null) {
             customer.setId(currentId++);
@@ -19,7 +21,6 @@ public class CustomerRepositoryStub implements CustomerRepository {
         // Save or update the Rider in the in-memory database
         riderDatabase.put(customer.getId(), customer);
 
-        return customer;
     }
 
     @Override
