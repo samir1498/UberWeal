@@ -6,5 +6,5 @@ public interface CustomerUseCase {
 
     Customer preAuthorize(Customer customer, double amount);
 
-    Customer deductFunds(Customer customer, double amount);
+    void deductFunds(Customer customer, double amount);
 }

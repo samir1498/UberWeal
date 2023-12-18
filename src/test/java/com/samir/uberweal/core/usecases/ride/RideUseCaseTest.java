@@ -1,6 +1,7 @@
-package com.samir.uberweal.useCases;
+package com.samir.uberweal.core.usecases.ride;
 
 import com.samir.uberweal.core.domain.entities.customer.Customer;
+import com.samir.uberweal.core.domain.exceptions.InsufficientFundsException;
 import com.samir.uberweal.core.domain.observers.RideCompletionObserverImpl;
 import com.samir.uberweal.core.domain.repositories.customer.CustomerRepositoryStub;
 import com.samir.uberweal.core.domain.entities.driver.Driver;
@@ -11,8 +12,6 @@ import com.samir.uberweal.core.domain.entities.ride.RideType;
 import com.samir.uberweal.core.domain.repositories.ride.RideRepository;
 import com.samir.uberweal.core.domain.repositories.ride.RideRepositoryStub;
 import com.samir.uberweal.core.usecases.customer.CustomerUseCaseImpl;
-import com.samir.uberweal.core.usecases.ride.RideUseCase;
-import com.samir.uberweal.core.usecases.ride.RideUseCaseImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,21 +20,22 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.time.LocalDate;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class RideUseCaseTest {
 
     private RideUseCase underTest;
-    RideCompletionObserverImpl completionObserver;
+    private RideCompletionObserverImpl completionObserver;
 
     private Customer customer;
     private Driver driver;
 
     @BeforeEach
     void setUp() {
-        CustomerRepositoryStub riderRepositoryStub = new CustomerRepositoryStub();
-        CustomerUseCaseImpl customerUseCase = new CustomerUseCaseImpl(riderRepositoryStub);
+        CustomerRepositoryStub customerRepositoryStub = new CustomerRepositoryStub();
+        CustomerUseCaseImpl customerUseCase = new CustomerUseCaseImpl(customerRepositoryStub);
         RideRepository rideRepository = new RideRepositoryStub();
         underTest = new RideUseCaseImpl(rideRepository, customerUseCase);
         completionObserver = new RideCompletionObserverImpl(underTest, customerUseCase);
@@ -46,7 +46,7 @@ public class RideUseCaseTest {
                 .id(1L)
                 .joinedAt(LocalDate.now())
                 .build();
-        riderRepositoryStub.save(customer);
+        customerRepositoryStub.save(customer);
         driver = new Driver("driverId", "DriverName");
     }
 
@@ -77,6 +77,7 @@ public class RideUseCaseTest {
             "TRIP, 50, Outside Paris, Outside Paris",
     })
     @DisplayName("It Should Apply Correct Price")
+
     void itShould_bookDriver_ShouldApplyCorrectPrice(
             RideType type,
             double expectedPrice,
@@ -138,6 +139,7 @@ public class RideUseCaseTest {
     ) {
         // Arrange
         Ride ride = buildRide(type, startPoint, destination, 0);
+        // simulating that a customer joined less then a year ago
         customer.setJoinedAt(LocalDate.now().minusYears(1).minusMonths(1));
 
         // Act
@@ -207,5 +209,33 @@ public class RideUseCaseTest {
         assertEquals(initialFunds - expectedCharge, finalFunds);
         assertEquals(RideStatus.COMPLETED, bookedRide.getStatus());
     }
+
+
+    @ParameterizedTest(name = "{index}. {0} from {1} to {2}")
+    @CsvSource({
+            "TRIP, Paris, Outside Paris",
+            "JOURNEY, Paris, Paris",
+            "TRIP, Outside Paris, Outside Paris",
+    })
+    @DisplayName("Should not Book a Ride When Customer doesn't have Sufficient Funds")
+    void itShouldNot_bookRide_WithNoSufficientFunds(
+            RideType type,
+            Location startPoint,
+            Location destination
+    ) {
+        // Arrange
+        Ride ride = buildRide(type, startPoint, destination, 0);
+        customer.setFunds(0);
+        double initialFunds = customer.getFunds();
+
+        // Act
+        assertThatThrownBy(() -> underTest.bookRide(customer, driver, ride))
+                .isInstanceOf(InsufficientFundsException.class)
+                .hasMessageContaining("Insufficient funds to deduct: " + ride.getPrice());
+
+        // Assert
+        assertEquals(customer.getFunds(), initialFunds);
+    }
+
 
 }

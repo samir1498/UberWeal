@@ -2,9 +2,9 @@ package com.samir.uberweal.core.usecases.customer;
 
 
 import com.samir.uberweal.core.domain.entities.customer.Customer;
-import com.samir.uberweal.core.domain.repositories.customer.CustomerRepositoryStub;
-import com.samir.uberweal.core.domain.exceptions.InsufficientFundsException;
 import com.samir.uberweal.core.domain.exceptions.CustomerNotFoundException;
+import com.samir.uberweal.core.domain.exceptions.InsufficientFundsException;
+import com.samir.uberweal.core.domain.repositories.customer.CustomerRepository;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;
@@ -12,11 +12,11 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CustomerUseCaseImpl implements CustomerUseCase {
 
-    private final CustomerRepositoryStub repositoryStub;
+    private final CustomerRepository repository;
 
     @Override
     public Customer preAuthorize(Customer customer, double amount) {
-        Optional<Customer> riderOptional = repositoryStub.findRiderById(customer.getId());
+        Optional<Customer> riderOptional = repository.findRiderById(customer.getId());
 
         if (riderOptional.isPresent()) {
             double updatedBalance = riderOptional.get().getFunds() - amount;
@@ -26,16 +26,15 @@ public class CustomerUseCaseImpl implements CustomerUseCase {
                 throw new InsufficientFundsException("Insufficient funds to deduct: " + amount);
             }
         } else {
-            throw new CustomerNotFoundException("Rider not found with ID: " + customer.getId());
+            throw new CustomerNotFoundException("Customer not found with ID: " + customer.getId());
         }
     }
 
     @Override
-    public Customer deductFunds(Customer customer, double amount) {
-            double funds = customer.getFunds();
-            customer.setFunds(funds - amount);
-            repositoryStub.save(customer);
-            return customer;
+    public void deductFunds(Customer customer, double amount) {
+        double funds = customer.getFunds();
+        customer.setFunds(funds - amount);
+        repository.save(customer);
     }
 
 }
