@@ -17,15 +17,15 @@ public class RideUseCaseImpl implements RideUseCase {
     private final CustomerUseCase customerUseCase;
 
     @Override
-    public Ride bookRide(Customer customer, Driver driver, Ride ride) {
+    public Ride bookRide(Ride ride) {
 
         double price = calculateExpectedCharge(ride);
 
         if (price == 0) {
-            customer.setVoucher(true);
+            ride.getCustomer().setVoucher(true);
         }
 
-        customerUseCase.preAuthorize(customer, price);
+        customerUseCase.preAuthorize( ride.getCustomer(), price);
         rideRepository.save(ride);
 
         return ride;
@@ -49,21 +49,39 @@ public class RideUseCaseImpl implements RideUseCase {
             default -> ride.setPrice(-1);
         }
 
+        applyFirstYearDiscount(ride);
+
+        applyDistanceDiscount(ride);
+
+        return ride.getPrice();
+
+    }
+
+    private static void applyDistanceDiscount(Ride ride) {
+        double distance = ride.getDistance();
+        double price = ride.getPrice();
+
+        if (distance < 5 && distance > 0) {
+            ride.setPrice(price - 5);
+        }
+    }
+
+    private static void applyFirstYearDiscount(Ride ride) {
         LocalDate joinedAt = ride.getCustomer().getJoinedAt();
         LocalDate today = LocalDate.now();
         double price = ride.getPrice();
         if (joinedAt.plusYears(1).isBefore(today)) {
             ride.setPrice(price / 2);
         }
+    }
 
-        double distance = ride.getDistance();
-
-        if (distance < 5 && distance > 0) {
-            ride.setPrice(price - 5);
-        }
-
-        return price;
-
+    private double calculateTripPrice(boolean isRiderInParis, boolean isDestinationParis){
+        return (isRiderInParis && !isDestinationParis) ? 30 :
+                (!isRiderInParis && !isDestinationParis) ? 50 : -1;
+    }
+    private double calculateJourneyPrice(boolean isRiderInParis, boolean isDestinationParis){
+        return (isRiderInParis && !isDestinationParis) ? 30 :
+                (!isRiderInParis && !isDestinationParis) ? 50 : -1;
     }
 
 

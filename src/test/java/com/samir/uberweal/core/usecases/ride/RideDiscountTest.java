@@ -1,7 +1,6 @@
 package com.samir.uberweal.core.usecases.ride;
 
 import com.samir.uberweal.core.domain.entities.customer.Customer;
-import com.samir.uberweal.core.domain.exceptions.InsufficientFundsException;
 import com.samir.uberweal.core.domain.observers.RideCompletionObserverImpl;
 import com.samir.uberweal.core.domain.repositories.customer.CustomerRepositoryStub;
 import com.samir.uberweal.core.domain.entities.driver.Driver;
@@ -20,11 +19,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.time.LocalDate;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class RideUseCaseTest {
+public class RideDiscountTest {
 
     private RideUseCase underTest;
     private RideCompletionObserverImpl completionObserver;
@@ -69,58 +66,7 @@ public class RideUseCaseTest {
         ride.addObserver(completionObserver);
         return ride;
     }
-    @ParameterizedTest(name = "{index}. {0} from {2} to {3} costs {1}€")
-    @CsvSource({
-            "TRIP, 30, Paris, Outside Paris",
-            "JOURNEY, 0, Outside Paris, Paris",
-            "JOURNEY, 10, Paris, Paris",
-            "TRIP, 50, Outside Paris, Outside Paris",
-    })
-    @DisplayName("It Should Apply Correct Price")
 
-    void itShould_bookDriver_ShouldApplyCorrectPrice(
-            RideType type,
-            double expectedPrice,
-            Location startPoint,
-            Location destination
-    ) {
-        // Arrange
-        Ride ride = buildRide(type, startPoint, destination, 0);
-
-        // Act
-        Ride bookedRide = underTest.bookRide(customer, driver, ride);
-
-        // Assert
-        assertEquals(expectedPrice, bookedRide.getPrice());
-        assertEquals(type, bookedRide.getRideType());
-    }
-
-
-    @ParameterizedTest(name = "{index}. {0} from {1} to {2}")
-    @CsvSource({
-            "TRIP, Paris, Outside Paris",
-            "JOURNEY, Outside Paris, Paris",
-            "JOURNEY, Paris, Paris",
-            "TRIP, Outside Paris, Outside Paris",
-    })
-    @DisplayName("Book a Ride When Customer has Sufficient Funds")
-    void itShould_bookRide_WithSufficientFunds(
-            RideType type,
-            Location startPoint,
-            Location destination
-    ) {
-        // Arrange
-        Ride ride = buildRide(type, startPoint, destination, 0);
-        double initialFunds = customer.getFunds();
-
-        // Act
-        Ride bookedRide = underTest.bookRide(customer, driver, ride);
-
-        // Assert
-        assertNotNull(bookedRide);
-        assertEquals(customer.getFunds(), initialFunds);
-
-    }
 
     @ParameterizedTest(name = "{index}. {0} from {1} to {2} should deduct half of {3}€ and set voucher to {4}")
     @CsvSource({
@@ -129,8 +75,8 @@ public class RideUseCaseTest {
             "JOURNEY, Paris, Paris, 10, false",
             "TRIP, Outside Paris, Outside Paris, 50, false",
     })
-    @DisplayName("Book a Ride With Half Price In The First Year")
-    void itShould_bookRide_WithHalfPrice_InTheFirstYear(
+    @DisplayName("Apply Half Price Discount In The First Year")
+    void itShould_applyDiscount_WithHalfPrice_InTheFirstYear(
             RideType type,
             Location startPoint,
             Location destination,
@@ -143,7 +89,7 @@ public class RideUseCaseTest {
         customer.setJoinedAt(LocalDate.now().minusYears(1).minusMonths(1));
 
         // Act
-        Ride bookedRide = underTest.bookRide(customer, driver, ride);
+        Ride bookedRide = underTest.bookRide(ride);
 
         // Assert
         assertEquals(cost / 2, bookedRide.getPrice());
@@ -162,8 +108,8 @@ public class RideUseCaseTest {
             "JOURNEY, Paris, Paris, 10, 3",
             "TRIP, Outside Paris, Outside Paris, 50, 2",
     })
-    @DisplayName("Book a Ride With 5€ Discount When Distance is less Then 5km")
-    void itShould_bookRide_With5eurosDiscount_WhenDistanceIsLessThenKm(
+    @DisplayName("Apply 5€ Discount When Distance is less Then 5km")
+    void itShould_Apply5eurosDiscount_WhenDistanceIsLessThen5Km(
             RideType type,
             Location startPoint,
             Location destination,
@@ -174,67 +120,11 @@ public class RideUseCaseTest {
         Ride ride = buildRide(type, startPoint, destination, distance);
 
         // Act
-        Ride bookedRide = underTest.bookRide(customer, driver, ride);
+        Ride bookedRide = underTest.bookRide(ride);
         double price = bookedRide.getPrice();
         // Assert
         assertEquals(cost - 5, price);
         assertEquals(type, bookedRide.getRideType());
-    }
-
-    @ParameterizedTest(name = "{index}. {0} from {1} to {2} Should Charge after Ride Completed")
-    @CsvSource({
-            "TRIP, Paris, Outside Paris",
-            "JOURNEY, Outside Paris, Paris",
-            "JOURNEY, Paris, Paris, false",
-            "TRIP, Outside Paris, Outside Paris",
-    })
-    @DisplayName("It Should Charge Customer When Ride Is Complete")
-    void itShould_ChargeCustomer_WhenRideIsComplete(
-            RideType type,
-            Location startPoint,
-            Location destination
-    ) {
-        // Arrange
-        double initialFunds = customer.getFunds();
-        Ride ride = buildRide(type, startPoint, destination, 10);
-
-        // Act
-        Ride bookedRide = underTest.bookRide(customer, driver, ride);
-        bookedRide.completeRide();
-
-        // Assert
-        double finalFunds = customer.getFunds();
-        double expectedCharge = underTest.calculateExpectedCharge(bookedRide);
-
-        assertEquals(initialFunds - expectedCharge, finalFunds);
-        assertEquals(RideStatus.COMPLETED, bookedRide.getStatus());
-    }
-
-
-    @ParameterizedTest(name = "{index}. {0} from {1} to {2}")
-    @CsvSource({
-            "TRIP, Paris, Outside Paris",
-            "JOURNEY, Paris, Paris",
-            "TRIP, Outside Paris, Outside Paris",
-    })
-    @DisplayName("Should not Book a Ride When Customer doesn't have Sufficient Funds")
-    void itShouldNot_bookRide_WithNoSufficientFunds(
-            RideType type,
-            Location startPoint,
-            Location destination
-    ) {
-        // Arrange
-        Ride ride = buildRide(type, startPoint, destination, 0);
-        customer.setFunds(0);
-        double initialFunds = customer.getFunds();
-
-        // Act
-        assertThatThrownBy(() -> underTest.bookRide(customer, driver, ride))
-                .isInstanceOf(InsufficientFundsException.class)
-                .hasMessageContaining("Insufficient funds to deduct: " + ride.getPrice());
-
-        // Assert
-        assertEquals(customer.getFunds(), initialFunds);
     }
 
 
