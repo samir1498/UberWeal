@@ -3,22 +3,17 @@ package com.samir.uberweal.core.usecases.ride;
 import com.samir.uberweal.core.domain.entities.customer.Customer;
 import com.samir.uberweal.core.domain.exceptions.InsufficientFundsException;
 import com.samir.uberweal.core.domain.observers.RideCompletionObserverImpl;
-import com.samir.uberweal.core.domain.repositories.customer.CustomerRepositoryStub;
 import com.samir.uberweal.core.domain.entities.driver.Driver;
 import com.samir.uberweal.core.domain.entities.location.Location;
 import com.samir.uberweal.core.domain.entities.ride.Ride;
 import com.samir.uberweal.core.domain.entities.ride.RideStatus;
 import com.samir.uberweal.core.domain.entities.ride.RideType;
 import com.samir.uberweal.core.domain.repositories.ride.RideRepository;
-import com.samir.uberweal.core.domain.repositories.ride.RideRepositoryStub;
-import com.samir.uberweal.core.usecases.customer.CustomerUseCaseImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,40 +26,31 @@ public class RideCompletionTest {
     private Customer customer;
     private Driver driver;
 
+    private  RideRepository rideRepository;
+    private RideTestUtils.SetupResult setupResult;
+
     @BeforeEach
     void setUp() {
-        CustomerRepositoryStub customerRepositoryStub = new CustomerRepositoryStub();
-        CustomerUseCaseImpl customerUseCase = new CustomerUseCaseImpl(customerRepositoryStub);
-        RideRepository rideRepository = new RideRepositoryStub();
-        underTest = new RideUseCaseImpl(rideRepository, customerUseCase);
-        completionObserver = new RideCompletionObserverImpl(underTest, customerUseCase);
-
-        customer = Customer
-                .builder()
-                .funds(100)
-                .id(1L)
-                .joinedAt(LocalDate.now())
-                .build();
-        customerRepositoryStub.save(customer);
-        driver = new Driver("driverId", "DriverName");
+        setupResult = RideTestUtils.commonSetup();
     }
+
 
     @AfterEach
     void tearDown() {
-        customer.setFunds(100);
+        setupResult.customer.setFunds(100);
     }
 
 
     private Ride buildRide(RideType type, Location startPoint, Location destination) {
         Ride ride =  Ride.builder()
-                .customer(customer)
-                .driver(driver)
+                .customer(setupResult.customer)
+                .driver(setupResult.driver)
                 .destination(destination)
                 .startingPoint(startPoint)
                 .rideType(type)
                 .status(RideStatus.IN_PROGRESS)
                 .build();
-        ride.addObserver(completionObserver);
+        ride.addObserver(setupResult.completionObserver);
         return ride;
     }
 
@@ -82,16 +68,16 @@ public class RideCompletionTest {
             Location destination
     ) {
         // Arrange
-        double initialFunds = customer.getFunds();
+        double initialFunds = setupResult.customer.getFunds();
         Ride ride = buildRide(type, startPoint, destination);
 
         // Act
-        Ride bookedRide = underTest.bookRide(ride);
+        Ride bookedRide = setupResult.underTest.bookRide(ride);
         bookedRide.completeRide();
 
         // Assert
-        double finalFunds = customer.getFunds();
-        double expectedCharge = underTest.calculateExpectedCharge(bookedRide);
+        double finalFunds = setupResult.customer.getFunds();
+        double expectedCharge = setupResult.underTest.calculateExpectedCharge(bookedRide);
 
         assertEquals(initialFunds - expectedCharge, finalFunds);
         assertEquals(RideStatus.COMPLETED, bookedRide.getStatus());
@@ -112,16 +98,16 @@ public class RideCompletionTest {
     ) {
         // Arrange
         Ride ride = buildRide(type, startPoint, destination);
-        customer.setFunds(0);
-        double initialFunds = customer.getFunds();
+        setupResult.customer.setFunds(0);
+        double initialFunds = setupResult.customer.getFunds();
 
         // Act
-        assertThatThrownBy(() -> underTest.bookRide(ride))
+        assertThatThrownBy(() -> setupResult.underTest.bookRide(ride))
                 .isInstanceOf(InsufficientFundsException.class)
                 .hasMessageContaining("Insufficient funds to deduct: " + ride.getPrice());
 
         // Assert
-        assertEquals(customer.getFunds(), initialFunds);
+        assertEquals(setupResult.customer.getFunds(), initialFunds);
     }
 
 
