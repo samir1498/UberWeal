@@ -1,4 +1,4 @@
-package com.samir.uberweal.core.domain.entities.location;
+package com.samir.uberweal.core.domain.entities;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

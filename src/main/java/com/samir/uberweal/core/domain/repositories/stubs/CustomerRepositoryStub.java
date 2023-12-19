@@ -1,6 +1,7 @@
-package com.samir.uberweal.core.domain.repositories.customer;
+package com.samir.uberweal.core.domain.repositories.stubs;
 
-import com.samir.uberweal.core.domain.entities.customer.Customer;
+import com.samir.uberweal.core.domain.entities.Customer;
+import com.samir.uberweal.core.domain.repositories.CustomerRepository;
 
 import java.util.HashMap;
 import java.util.Map;

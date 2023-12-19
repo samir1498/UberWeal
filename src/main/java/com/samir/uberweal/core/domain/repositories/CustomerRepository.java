@@ -1,6 +1,6 @@
-package com.samir.uberweal.core.domain.repositories.customer;
+package com.samir.uberweal.core.domain.repositories;
 
-import com.samir.uberweal.core.domain.entities.customer.Customer;
+import com.samir.uberweal.core.domain.entities.Customer;
 
 import java.util.Optional;
 

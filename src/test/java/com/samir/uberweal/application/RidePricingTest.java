@@ -24,9 +24,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class RideDiscountTest {
+public class RidePricingTest {
+
     private CustomerUseCase customerUseCase;
 
     private BookRideUseCase underTest;
@@ -38,7 +39,7 @@ class RideDiscountTest {
     void setUp() {
         CustomerRepository customerRepository = new CustomerRepositoryStub();
         customerUseCase = new CustomerUseCaseImpl(customerRepository);
-        underTest = setUpBookRideUseCase();
+        underTest = setUpBookRideUseCase(customerUseCase);
 
         customer = Customer.builder()
                 .funds(100)
@@ -53,22 +54,26 @@ class RideDiscountTest {
                 .build();
     }
 
-    private BookRideUseCase setUpBookRideUseCase() {
+    private BookRideUseCase setUpBookRideUseCase(CustomerUseCase customerUseCase) {
         RideRepository rideRepository = new RideRepositoryStub();
-        TripRideChargeCalculator tripRideChargeCalculator = new TripRideChargeCalculator();
-        JourneyRideChargeCalculator journeyRideChargeCalculator = new JourneyRideChargeCalculator();
-        RideChargeCalculatorFactory rideChargeCalculatorFactor = new RideChargeCalculatorFactory(tripRideChargeCalculator, journeyRideChargeCalculator);
+        RideChargeCalculatorFactory rideChargeCalculatorFactor = setupRideChargeCalculatorFactory();
 
         return new BookRideUseCaseImpl(rideRepository, customerUseCase,rideChargeCalculatorFactor);
     }
+
+    private static RideChargeCalculatorFactory setupRideChargeCalculatorFactory() {
+        TripRideChargeCalculator tripRideChargeCalculator = new TripRideChargeCalculator();
+        JourneyRideChargeCalculator journeyRideChargeCalculator = new JourneyRideChargeCalculator();
+        return new RideChargeCalculatorFactory(tripRideChargeCalculator, journeyRideChargeCalculator);
+    }
+
 
     private Ride buildRide(
             Customer customer,
             Driver driver,
             RideType type,
             Location startPoint,
-            Location destination,
-            double distance
+            Location destination
     ) {
         RideCompletionObserver completionObserver = new RideCompletionObserverImpl(customerUseCase);
 
@@ -78,69 +83,36 @@ class RideDiscountTest {
                 .destination(destination)
                 .startingPoint(startPoint)
                 .rideType(type)
-                .distance(distance)
                 .status(RideStatus.IN_PROGRESS)
                 .build();
         ride.addObserver(completionObserver);
         return ride;
     }
 
-    @ParameterizedTest(name = "{index}. {0} from {1} to {2} should deduct half of {3}€ and set voucher to {4}")
+
+    @ParameterizedTest(name = "{index}. {0} from {2} to {3} costs {1}€")
     @CsvSource({
-            "TRIP, Paris, Outside Paris, 30, false",
-            "JOURNEY, Outside Paris, Paris, 0, true",
-            "JOURNEY, Paris, Paris, 10, false",
-            "TRIP, Outside Paris, Outside Paris, 50, false",
+            "TRIP, 30, Paris, Outside Paris",
+            "JOURNEY, 0, Outside Paris, Paris",
+            "JOURNEY, 10, Paris, Paris",
+            "TRIP, 50, Outside Paris, Outside Paris",
     })
-    @DisplayName("Apply Half Price Discount In The First Year")
-    void itShould_applyDiscount_WithHalfPrice_InTheFirstYear(
+    @DisplayName("It Should Apply Correct Price")
+
+    void itShould_ApplyCorrectPrice(
             RideType type,
+            double expectedPrice,
             Location startPoint,
-            Location destination,
-            double cost,
-            boolean voucher
+            Location destination
     ) {
         // Arrange
-        Ride ride = buildRide(customer, driver, type, startPoint, destination, 0);
-        // simulating that a customer joined less then a year ago
-        customer.setJoinedAt(LocalDate.now().minusYears(1).minusMonths(1));
+        Ride ride = buildRide(customer, driver, type, startPoint, destination);
 
         // Act
         Ride bookedRide = underTest.bookRide(ride);
 
         // Assert
-        assertEquals(cost / 2, bookedRide.getPrice());
-
-        assertEquals(bookedRide.getCustomer().isVoucher(), voucher);
-
-        assertEquals(type, bookedRide.getRideType());
-    }
-
-
-    //If the number of kilometers is less than 5 km, then it will have a 5-euro discount.
-    @ParameterizedTest(name = "{index}. {0} from {1} to {2} should discount 5€ from {3}€ ")
-    @CsvSource({
-            "TRIP, Paris, Outside Paris, 30, 4",
-            "JOURNEY, Outside Paris, Paris, 0, 4.5",
-            "JOURNEY, Paris, Paris, 10, 3",
-            "TRIP, Outside Paris, Outside Paris, 50, 2",
-    })
-    @DisplayName("Apply 5€ Discount When Distance is less Then 5km")
-    void itShould_Apply5eurosDiscount_WhenDistanceIsLessThen5Km(
-            RideType type,
-            Location startPoint,
-            Location destination,
-            double cost,
-            double distance
-    ) {
-        // Arrange
-        Ride ride = buildRide(customer, driver, type, startPoint, destination, distance);
-
-        // Act
-        Ride bookedRide = underTest.bookRide(ride);
-        double price = bookedRide.getPrice();
-        // Assert
-        assertEquals(cost - 5, price);
+        assertEquals(expectedPrice, bookedRide.getPrice());
         assertEquals(type, bookedRide.getRideType());
     }
 

@@ -1,4 +1,4 @@
-package com.samir.uberweal.core.domain.repositories.ride;
+package com.samir.uberweal.core.domain.repositories;
 
 import com.samir.uberweal.core.domain.entities.ride.Ride;
 
@@ -9,6 +9,7 @@ public interface RideRepository {
 
     List<Ride> findByCustomerId(Long customerId);
 
+    List<Ride> findAll();
     List<Ride> findByDriverId(String driverId);
 }
 

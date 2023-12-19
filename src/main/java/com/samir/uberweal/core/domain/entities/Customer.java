@@ -1,4 +1,4 @@
-package com.samir.uberweal.core.domain.entities.customer;
+package com.samir.uberweal.core.domain.entities;
 
 
 import java.time.LocalDate;

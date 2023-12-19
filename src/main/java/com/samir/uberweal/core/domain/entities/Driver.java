@@ -1,4 +1,4 @@
-package com.samir.uberweal.core.domain.entities.driver;
+package com.samir.uberweal.core.domain.entities;
 
 import lombok.Builder;
 import lombok.Data;

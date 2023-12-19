@@ -1,10 +1,11 @@
-package com.samir.uberweal.core.usecases.customer;
+package com.samir.uberweal.application;
 
-import com.samir.uberweal.core.domain.entities.customer.Customer;
+import com.samir.uberweal.core.domain.entities.Customer;
 import com.samir.uberweal.core.domain.exceptions.CustomerNotFoundException;
 import com.samir.uberweal.core.domain.exceptions.InsufficientFundsException;
-import com.samir.uberweal.core.domain.repositories.customer.CustomerRepository;
-import com.samir.uberweal.core.domain.repositories.customer.CustomerRepositoryStub;
+import com.samir.uberweal.core.domain.repositories.CustomerRepository;
+import com.samir.uberweal.core.domain.repositories.stubs.CustomerRepositoryStub;
+import com.samir.uberweal.core.usecases.CustomerUseCaseImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

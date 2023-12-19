@@ -1,12 +1,12 @@
 package com.samir.uberweal.core.domain.entities.ride;
 
-import com.samir.uberweal.core.domain.entities.driver.Driver;
+import com.samir.uberweal.core.domain.entities.Driver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.samir.uberweal.core.domain.entities.customer.Customer;
-import com.samir.uberweal.core.domain.entities.location.Location;
+import com.samir.uberweal.core.domain.entities.Customer;
+import com.samir.uberweal.core.domain.entities.Location;
 import com.samir.uberweal.core.domain.observers.RideCompletionObserver;
 import lombok.Builder;
 import lombok.Data;

@@ -1,6 +1,6 @@
-package com.samir.uberweal.core.usecases.customer;
+package com.samir.uberweal.application;
 
-import com.samir.uberweal.core.domain.entities.customer.Customer;
+import com.samir.uberweal.core.domain.entities.Customer;
 
 public interface CustomerUseCase {
 
