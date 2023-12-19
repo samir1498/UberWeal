@@ -37,19 +37,48 @@ The project follows the Clean Architecture principles with the following structu
 src
 ├── main
 │   ├── java
-│   │   ├── com.samir.uberweal
-│   │   │   ├── application
-│   │   │   ├── domain
-│   │   │   ├── infrastructure
-│   │   │   └── interfaces
-│   │   └── resources
+│   │   └── com.samir.uberweal
+│   │       ├── application
+│   │       │   ├── BookRideUseCase.java
+│   │       │   ├── ListPastRidesUseCase.java
+│   │       ├── core
+│   │       │   ├── domain
+│   │       │   │   ├── customer
+│   │       │   │   ├── driver
+│   │       │   │   └── ride
+│   │       │   └── usecases
+│   │       │       ├── BookRideUseCaseImpl.java
+│   │       │       ├── ListPastRidesUseCaseImpl.java
+│   │       ├── infrastructure
+│   │       │   ├── repositories
+│   │       │   │   └── RideRepository.java
+│   │       │   └── services
+│   │       │       └── PricingService.java
+│   │       └── interfaces
+│   │           ├── controllers
+│   │           │   └── RideController.java
+│   │           ├── presenters
+│   │           └── gateways
+│   └── resources
 └── test
     ├── java
     │   └── com.samir.uberweal
-    │       ├── application
-    │       ├── domain
+    │       ├── core
+    │       │   └── usecases
+    │       │       ├── BookRideUseCaseImplTest.java
+    │       │       ├── ListPastRidesUseCaseImplTest.java
+    │       ├── infrastructure
+    │       │   ├── repositories
+    │       │   │   └── RideRepositoryTest.java
+    │       │   └── services
+    │       │       └── PricingServiceTest.java
     │       └── interfaces
+    │           ├── controllers
+    │           │   └── RideControllerTest.java
+    │           ├── presenters
+    │           └── gateways
     └── resources
+
 ```
 
 ### Classes and Packages
