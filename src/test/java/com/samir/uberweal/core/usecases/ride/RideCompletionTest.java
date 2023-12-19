@@ -20,13 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RideCompletionTest {
 
-    private RideUseCase underTest;
-    private RideCompletionObserverImpl completionObserver;
-
-    private Customer customer;
-    private Driver driver;
-
-    private  RideRepository rideRepository;
     private RideTestUtils.SetupResult setupResult;
 
     @BeforeEach
