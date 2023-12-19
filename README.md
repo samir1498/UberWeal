@@ -39,24 +39,12 @@ src
 │   ├── java
 │   │   └── com.samir.uberweal
 │   │       ├── application
-│   │       │   ├── BookRideUseCase.java
-│   │       │   ├── ListPastRidesUseCase.java
 │   │       ├── core
 │   │       │   ├── domain
-│   │       │   │   ├── customer
-│   │       │   │   ├── driver
-│   │       │   │   └── ride
 │   │       │   └── usecases
-│   │       │       ├── BookRideUseCaseImpl.java
-│   │       │       ├── ListPastRidesUseCaseImpl.java
 │   │       ├── infrastructure
-│   │       │   ├── repositories
-│   │       │   │   └── RideRepository.java
-│   │       │   └── services
-│   │       │       └── PricingService.java
 │   │       └── interfaces
 │   │           ├── controllers
-│   │           │   └── RideController.java
 │   │           ├── presenters
 │   │           └── gateways
 │   └── resources
@@ -68,13 +56,8 @@ src
     │       │       ├── BookRideUseCaseImplTest.java
     │       │       ├── ListPastRidesUseCaseImplTest.java
     │       ├── infrastructure
-    │       │   ├── repositories
-    │       │   │   └── RideRepositoryTest.java
-    │       │   └── services
-    │       │       └── PricingServiceTest.java
     │       └── interfaces
     │           ├── controllers
-    │           │   └── RideControllerTest.java
     │           ├── presenters
     │           └── gateways
     └── resources
