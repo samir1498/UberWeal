@@ -1,16 +1,14 @@
 package com.samir.uberweal.core.domain.entities.driver;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class Driver {
-    private final String id;
+    private final Long id;
     private final String name;
 
-    public Driver(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
 }
 

@@ -1,14 +1,10 @@
 package com.samir.uberweal.core.usecases.ride;
 
-import com.samir.uberweal.core.domain.entities.customer.Customer;
 import com.samir.uberweal.core.domain.exceptions.InsufficientFundsException;
-import com.samir.uberweal.core.domain.observers.RideCompletionObserverImpl;
-import com.samir.uberweal.core.domain.entities.driver.Driver;
 import com.samir.uberweal.core.domain.entities.location.Location;
 import com.samir.uberweal.core.domain.entities.ride.Ride;
 import com.samir.uberweal.core.domain.entities.ride.RideStatus;
 import com.samir.uberweal.core.domain.entities.ride.RideType;
-import com.samir.uberweal.core.domain.repositories.ride.RideRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

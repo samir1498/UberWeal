@@ -9,7 +9,6 @@ import com.samir.uberweal.core.domain.repositories.ride.RideRepositoryStub;
 import com.samir.uberweal.core.domain.services.DiscountService;
 import com.samir.uberweal.core.domain.services.DiscountServiceImpl;
 import com.samir.uberweal.core.usecases.customer.CustomerUseCaseImpl;
-import com.samir.uberweal.core.usecases.ride.*;
 
 import java.time.LocalDate;
 

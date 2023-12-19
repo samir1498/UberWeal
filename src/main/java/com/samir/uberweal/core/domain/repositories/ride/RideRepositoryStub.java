@@ -15,7 +15,7 @@ public class RideRepositoryStub implements RideRepository {
     }
 
     @Override
-    public List<Ride> findByRiderId(Long riderId) {
+    public List<Ride> findByCustomerId(Long riderId) {
         List<Ride> rides = new ArrayList<>();
         for (Ride ride : ridesMap.values()) {
             if (Objects.equals(ride.getCustomer().getId(), riderId)) {

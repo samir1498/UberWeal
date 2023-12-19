@@ -7,7 +7,7 @@ import java.util.List;
 public interface RideRepository {
     Ride save(Ride ride);
 
-    List<Ride> findByRiderId(Long riderId);
+    List<Ride> findByCustomerId(Long customerId);
 
     List<Ride> findByDriverId(String driverId);
 }
