@@ -1,7 +1,6 @@
 package com.samir.uberweal.application.commandhandlers;
 
 import com.samir.uberweal.core.domain.entities.Rider;
-import com.samir.uberweal.core.domain.entities.Driver;
 import com.samir.uberweal.core.domain.entities.Location;
 import com.samir.uberweal.core.domain.entities.ride.RideType;
 import com.samir.uberweal.application.commands.BookRideCommand;
@@ -16,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class BookRideTest {
 
     private Rider rider;
-    private Driver driver;
     private BookRideCommandHandler underTest;
 
     @BeforeEach

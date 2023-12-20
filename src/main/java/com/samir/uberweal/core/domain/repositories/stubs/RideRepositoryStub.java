@@ -10,9 +10,8 @@ public class RideRepositoryStub implements RideRepository {
     private final Map<Long, Ride> ridesMap = new HashMap<>();
 
     @Override
-    public Ride save(Ride ride) {
+    public void save(Ride ride) {
         ridesMap.put(ride.getId(), ride);
-        return ride;
     }
 
     @Override
@@ -34,13 +33,6 @@ public class RideRepositoryStub implements RideRepository {
             }
         }
         return rides;
-    }
-
-
-
-    @Override
-    public List<Ride> findByDriverId(String driverId) {
-        return null;
     }
 
 }

@@ -1,13 +1,10 @@
 package com.samir.uberweal;
 
 import com.samir.uberweal.application.commands.BookRideCommand;
-import com.samir.uberweal.core.domain.entities.Driver;
 import com.samir.uberweal.core.domain.entities.Location;
 import com.samir.uberweal.core.domain.entities.Rider;
 import com.samir.uberweal.core.domain.entities.ride.RideType;
-import com.samir.uberweal.core.domain.repositories.RiderRepository;
 import com.samir.uberweal.core.domain.repositories.RideRepository;
-import com.samir.uberweal.core.domain.repositories.stubs.RiderRepositoryStub;
 import com.samir.uberweal.core.domain.repositories.stubs.RideRepositoryStub;
 import com.samir.uberweal.core.domain.services.pricing.RideChargeCalculatorFactory;
 import com.samir.uberweal.core.domain.services.pricing.strategies.JourneyRideChargeCalculator;

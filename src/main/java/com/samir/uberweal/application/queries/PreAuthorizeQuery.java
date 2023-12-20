@@ -1,4 +1,6 @@
 package com.samir.uberweal.application.queries;
 
-public record PreAuthorizeQuery(Long riderId, double amount) {
+import com.samir.uberweal.core.domain.entities.Rider;
+
+public record PreAuthorizeQuery(Rider rider, double amount) {
 }

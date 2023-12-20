@@ -2,7 +2,6 @@ package com.samir.uberweal.application.commandhandlers;
 
 import com.samir.uberweal.application.commands.BookRideCommand;
 import com.samir.uberweal.core.domain.entities.Rider;
-import com.samir.uberweal.core.domain.entities.Driver;
 import com.samir.uberweal.core.domain.entities.Location;
 import com.samir.uberweal.core.domain.entities.ride.Ride;
 import com.samir.uberweal.core.domain.entities.ride.RideType;
