@@ -1,7 +1,7 @@
-package com.samir.uberweal.core.domain.services.pricing.strategies;
+package com.samir.uberweal.domain.services.pricing.strategies;
 
-import com.samir.uberweal.core.domain.entities.ride.Ride;
-import com.samir.uberweal.core.domain.services.pricing.calculator.RideChargeCalculator;
+import com.samir.uberweal.domain.entities.ride.Ride;
+import com.samir.uberweal.domain.services.pricing.calculator.RideChargeCalculator;
 import org.springframework.stereotype.Component;
 
 @Component

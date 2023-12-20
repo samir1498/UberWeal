@@ -1,10 +1,10 @@
 package com.samir.uberweal.application.queryhandler;
 
 import com.samir.uberweal.application.queries.PreAuthorizeQuery;
-import com.samir.uberweal.core.domain.entities.Rider;
-import com.samir.uberweal.core.domain.exceptions.InsufficientFundsException;
-import com.samir.uberweal.core.domain.exceptions.RiderNotFoundException;
-import com.samir.uberweal.core.domain.repositories.RiderRepository;
+import com.samir.uberweal.domain.entities.Rider;
+import com.samir.uberweal.domain.exceptions.InsufficientFundsException;
+import com.samir.uberweal.domain.exceptions.RiderNotFoundException;
+import com.samir.uberweal.domain.repositories.RiderRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
-package com.samir.uberweal.core.domain.repositories;
+package com.samir.uberweal.domain.repositories;
 
-import com.samir.uberweal.core.domain.entities.Rider;
+import com.samir.uberweal.domain.entities.Rider;
 
 import java.util.Optional;
 

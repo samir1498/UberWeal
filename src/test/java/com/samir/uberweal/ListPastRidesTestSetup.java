@@ -1,9 +1,9 @@
 package com.samir.uberweal;
 
 import com.samir.uberweal.application.queryhandler.GetAllRidesQueryHandler;
-import com.samir.uberweal.core.domain.entities.Rider;
-import com.samir.uberweal.core.domain.repositories.RideRepository;
-import com.samir.uberweal.core.domain.repositories.stubs.RideRepositoryStub;
+import com.samir.uberweal.domain.entities.Rider;
+import com.samir.uberweal.domain.repositories.RideRepository;
+import com.samir.uberweal.domain.repositories.stubs.RideRepositoryStub;
 import lombok.Getter;
 
 import java.time.LocalDate;

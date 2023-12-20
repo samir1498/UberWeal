@@ -1,4 +1,4 @@
-package com.samir.uberweal.core.domain.exceptions;
+package com.samir.uberweal.domain.exceptions;
 
 import java.io.Serial;
 

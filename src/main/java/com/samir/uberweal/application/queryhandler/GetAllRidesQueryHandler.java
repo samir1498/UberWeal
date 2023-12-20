@@ -2,8 +2,8 @@ package com.samir.uberweal.application.queryhandler;
 
 import com.samir.uberweal.application.dtos.RideDto;
 import com.samir.uberweal.application.queries.GetAllRidesQuery;
-import com.samir.uberweal.core.domain.entities.ride.Ride;
-import com.samir.uberweal.core.domain.repositories.RideRepository;
+import com.samir.uberweal.domain.entities.ride.Ride;
+import com.samir.uberweal.domain.repositories.RideRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

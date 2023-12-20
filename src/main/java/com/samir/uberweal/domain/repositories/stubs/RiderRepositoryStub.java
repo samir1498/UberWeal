@@ -1,7 +1,7 @@
-package com.samir.uberweal.core.domain.repositories.stubs;
+package com.samir.uberweal.domain.repositories.stubs;
 
-import com.samir.uberweal.core.domain.entities.Rider;
-import com.samir.uberweal.core.domain.repositories.RiderRepository;
+import com.samir.uberweal.domain.entities.Rider;
+import com.samir.uberweal.domain.repositories.RiderRepository;
 
 import java.util.HashMap;
 import java.util.Map;

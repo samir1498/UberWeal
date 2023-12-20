@@ -1,12 +1,12 @@
 package com.samir.uberweal.application.commandhandlers;
 
 import com.samir.uberweal.application.commands.BookRideCommand;
-import com.samir.uberweal.core.domain.entities.ride.Ride;
-import com.samir.uberweal.core.domain.observers.RideCompletionObserver;
-import com.samir.uberweal.core.domain.observers.RideCompletionObserverImpl;
-import com.samir.uberweal.core.domain.repositories.RideRepository;
-import com.samir.uberweal.core.domain.services.pricing.RideChargeCalculatorFactory;
-import com.samir.uberweal.core.domain.services.pricing.calculator.RideChargeCalculator;
+import com.samir.uberweal.domain.entities.ride.Ride;
+import com.samir.uberweal.domain.observers.RideCompletionObserver;
+import com.samir.uberweal.domain.observers.RideCompletionObserverImpl;
+import com.samir.uberweal.domain.repositories.RideRepository;
+import com.samir.uberweal.domain.services.pricing.RideChargeCalculatorFactory;
+import com.samir.uberweal.domain.services.pricing.calculator.RideChargeCalculator;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;

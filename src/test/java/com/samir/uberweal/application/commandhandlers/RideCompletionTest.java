@@ -1,11 +1,11 @@
 package com.samir.uberweal.application.commandhandlers;
 
 import com.samir.uberweal.application.commands.BookRideCommand;
-import com.samir.uberweal.core.domain.entities.Rider;
-import com.samir.uberweal.core.domain.entities.Location;
-import com.samir.uberweal.core.domain.entities.ride.Ride;
-import com.samir.uberweal.core.domain.entities.ride.RideStatus;
-import com.samir.uberweal.core.domain.entities.ride.RideType;
+import com.samir.uberweal.domain.entities.Rider;
+import com.samir.uberweal.domain.entities.Location;
+import com.samir.uberweal.domain.entities.ride.Ride;
+import com.samir.uberweal.domain.entities.ride.RideStatus;
+import com.samir.uberweal.domain.entities.ride.RideType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,9 +1,9 @@
 package com.samir.uberweal.application.commandhandlers;
 
 import com.samir.uberweal.application.commands.DeductFundsCommand;
-import com.samir.uberweal.core.domain.entities.Rider;
-import com.samir.uberweal.core.domain.repositories.RiderRepository;
-import com.samir.uberweal.core.domain.repositories.stubs.RiderRepositoryStub;
+import com.samir.uberweal.domain.entities.Rider;
+import com.samir.uberweal.domain.repositories.RiderRepository;
+import com.samir.uberweal.domain.repositories.stubs.RiderRepositoryStub;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -2,11 +2,11 @@ package com.samir.uberweal.application.commandhandlers;
 
 import com.samir.uberweal.application.queries.PreAuthorizeQuery;
 import com.samir.uberweal.application.queryhandler.PreAuthorizeQueryHandler;
-import com.samir.uberweal.core.domain.entities.Rider;
-import com.samir.uberweal.core.domain.exceptions.InsufficientFundsException;
-import com.samir.uberweal.core.domain.exceptions.RiderNotFoundException;
-import com.samir.uberweal.core.domain.repositories.RiderRepository;
-import com.samir.uberweal.core.domain.repositories.stubs.RiderRepositoryStub;
+import com.samir.uberweal.domain.entities.Rider;
+import com.samir.uberweal.domain.exceptions.InsufficientFundsException;
+import com.samir.uberweal.domain.exceptions.RiderNotFoundException;
+import com.samir.uberweal.domain.repositories.RiderRepository;
+import com.samir.uberweal.domain.repositories.stubs.RiderRepositoryStub;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,6 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RiderPreAuthorizeTest {

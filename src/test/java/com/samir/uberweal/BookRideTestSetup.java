@@ -1,14 +1,14 @@
 package com.samir.uberweal;
 
 import com.samir.uberweal.application.commands.BookRideCommand;
-import com.samir.uberweal.core.domain.entities.Location;
-import com.samir.uberweal.core.domain.entities.Rider;
-import com.samir.uberweal.core.domain.entities.ride.RideType;
-import com.samir.uberweal.core.domain.repositories.RideRepository;
-import com.samir.uberweal.core.domain.repositories.stubs.RideRepositoryStub;
-import com.samir.uberweal.core.domain.services.pricing.RideChargeCalculatorFactory;
-import com.samir.uberweal.core.domain.services.pricing.strategies.JourneyRideChargeCalculator;
-import com.samir.uberweal.core.domain.services.pricing.strategies.TripRideChargeCalculator;
+import com.samir.uberweal.domain.entities.Location;
+import com.samir.uberweal.domain.entities.Rider;
+import com.samir.uberweal.domain.entities.ride.RideType;
+import com.samir.uberweal.domain.repositories.RideRepository;
+import com.samir.uberweal.domain.repositories.stubs.RideRepositoryStub;
+import com.samir.uberweal.domain.services.pricing.RideChargeCalculatorFactory;
+import com.samir.uberweal.domain.services.pricing.strategies.JourneyRideChargeCalculator;
+import com.samir.uberweal.domain.services.pricing.strategies.TripRideChargeCalculator;
 import com.samir.uberweal.application.commandhandlers.BookRideCommandHandler;
 import lombok.Getter;
 

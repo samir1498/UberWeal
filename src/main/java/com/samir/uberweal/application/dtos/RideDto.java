@@ -1,6 +1,6 @@
 package com.samir.uberweal.application.dtos;
 
-import com.samir.uberweal.core.domain.entities.ride.RideStatus;
+import com.samir.uberweal.domain.entities.ride.RideStatus;
 import lombok.Builder;
 import lombok.Data;
 

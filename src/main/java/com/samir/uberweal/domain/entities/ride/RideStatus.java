@@ -1,4 +1,4 @@
-package com.samir.uberweal.core.domain.entities.ride;
+package com.samir.uberweal.domain.entities.ride;
 
 public enum RideStatus {
     COMPLETED,

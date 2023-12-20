@@ -1,7 +1,7 @@
-package com.samir.uberweal.core.domain.observers;
+package com.samir.uberweal.domain.observers;
 
-import com.samir.uberweal.core.domain.entities.Rider;
-import com.samir.uberweal.core.domain.entities.ride.Ride;
+import com.samir.uberweal.domain.entities.Rider;
+import com.samir.uberweal.domain.entities.ride.Ride;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
