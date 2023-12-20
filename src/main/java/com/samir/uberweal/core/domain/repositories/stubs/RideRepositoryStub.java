@@ -21,10 +21,15 @@ public class RideRepositoryStub implements RideRepository {
     }
 
     @Override
-    public List<Ride> findByCustomerId(Long riderId) {
+    public Optional<Ride> findById(Long rideId) {
+        return Optional.of(ridesMap.get(rideId));
+    }
+
+    @Override
+    public List<Ride> findByRiderId(Long riderId) {
         List<Ride> rides = new ArrayList<>();
         for (Ride ride : ridesMap.values()) {
-            if (Objects.equals(ride.getCustomer().getId(), riderId)) {
+            if (Objects.equals(ride.getRider().getId(), riderId)) {
                 rides.add(ride);
             }
         }

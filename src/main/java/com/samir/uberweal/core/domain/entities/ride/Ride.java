@@ -5,7 +5,7 @@ import com.samir.uberweal.core.domain.entities.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.samir.uberweal.core.domain.entities.Customer;
+import com.samir.uberweal.core.domain.entities.Rider;
 import com.samir.uberweal.core.domain.entities.Location;
 import com.samir.uberweal.core.domain.observers.RideCompletionObserver;
 import lombok.Builder;
@@ -15,14 +15,14 @@ import lombok.Data;
 @Builder
 public class Ride {
     private Long id;
-    private Customer customer;
-    private Driver driver;
+    private final Rider rider;
+    private final Driver driver;
     private final Location destination;
     private final Location startingPoint;
     private final RideType rideType;
     @Builder.Default
     private double price = -1;
-    private double distance;
+    private final double distance;
     private RideStatus status;
     @Builder.Default
     private List<RideCompletionObserver> completionObservers = new ArrayList<>();

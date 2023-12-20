@@ -10,8 +10,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class Customer {
+public class Rider {
     private Long id;
+    private String name;
     private double funds;
     private LocalDate joinedAt;
     @Builder.Default
