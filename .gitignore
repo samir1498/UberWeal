@@ -36,5 +36,5 @@ build/
 **/src/main/resources/application.properties
 /bin/README.md
 /bin/.gitignore
-/bin/src/main/java/com/samir/uberweal/domain/customer/CustomerRepositoryStub.class
-/bin/src/main/java/com/samir/uberweal/domain/customer/Customer.class
+/bin/src/main/java/com/samir/uberweal/domain/Rider/RiderRepositoryStub.class
+/bin/src/main/java/com/samir/uberweal/domain/Rider/Rider.class
