@@ -1,7 +1,7 @@
-package com.samir.uberweal.core.domain.repositories.stubs;
+package com.samir.uberweal.domain.repositories.stubs;
 
-import com.samir.uberweal.core.domain.entities.ride.Ride;
-import com.samir.uberweal.core.domain.repositories.RideRepository;
+import com.samir.uberweal.domain.entities.ride.Ride;
+import com.samir.uberweal.domain.repositories.RideRepository;
 
 import java.util.*;
 
@@ -17,11 +17,6 @@ public class RideRepositoryStub implements RideRepository {
     @Override
     public List<Ride> findAll(){
         return new ArrayList<>(ridesMap.values());
-    }
-
-    @Override
-    public Optional<Ride> findById(Long rideId) {
-        return Optional.of(ridesMap.get(rideId));
     }
 
     @Override
