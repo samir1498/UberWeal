@@ -8,8 +8,8 @@ import lombok.Builder;
 @Builder
 public record BookRideCommand(
         Rider rider,
-        Location riderLocation,
-        Location destination,
+        Location startLocation,
+        Location endLocation,
         double distance,
         RideType type
 ) {

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 public class JourneyRideChargeCalculator implements RideChargeCalculator {
     @Override
     public double calculateCharge(Ride ride) {
-        boolean isRiderInParis = ride.getStartingPoint().getName().equals("Paris");
-        boolean isDestinationParis = ride.getDestination().getName().equals("Paris");
+        boolean isRiderInParis = ride.getStartLocation().getName().equals("Paris");
+        boolean isDestinationParis = ride.getEndLocation().getName().equals("Paris");
 
         return (!isRiderInParis && isDestinationParis) ? 0 :
                (isRiderInParis && isDestinationParis) ? 10 : -1;

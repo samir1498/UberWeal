@@ -1,6 +1,7 @@
-package com.samir.uberweal.application.dtos;
+package com.samir.uberweal.adapters.dtos;
 
 import com.samir.uberweal.domain.entities.ride.RideStatus;
+import com.samir.uberweal.domain.entities.ride.RideType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,11 +9,11 @@ import lombok.Data;
 @Builder
 public class RideDto {
     private Long id;
-    private String customerName;
-    private String driverName;
-    private String destination;
-    private String startingPoint;
+    private String riderName;
+    private String startLocation;
+    private String endLocation;
     private double price;
     private double distance;
     private RideStatus status;
+    private RideType type;
 }

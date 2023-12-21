@@ -17,8 +17,8 @@ public class Ride {
     private Long id;
     private final Rider rider;
     private final Driver driver;
-    private final Location destination;
-    private final Location startingPoint;
+    private final Location endLocation;
+    private final Location startLocation;
     private final RideType rideType;
     @Builder.Default
     private double price = -1;
