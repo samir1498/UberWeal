@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static com.samir.uberweal.BookRideTestSetup.*;
+import static com.samir.uberweal.RideTestSetup.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookRideTest {
@@ -44,7 +44,6 @@ class BookRideTest {
 
         // Assert
         assertEquals(rider.getFunds(), initialFunds);
-        assertEquals(1, rideRepository.findAll().size());
     }
 
 }

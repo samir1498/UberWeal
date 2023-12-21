@@ -11,8 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static com.samir.uberweal.BookRideTestSetup.*;
-import static com.samir.uberweal.BookRideTestSetup.setupBookRideCommandHandler;
+import static com.samir.uberweal.RideTestSetup.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RideCompletionTest {
@@ -44,7 +43,7 @@ class RideCompletionTest {
         underTest.handle(bookRideCommand);
 
         // Act
-        Ride ride = rideRepository.findAll().get(0);
+        Ride ride = LIST_PAST_RIDES_DS_GATEWAY.findByRiderId(rider.getId()).get(0);
         ride.completeRide();
 
         // Assert

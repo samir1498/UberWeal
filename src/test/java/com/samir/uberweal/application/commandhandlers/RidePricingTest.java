@@ -10,8 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static com.samir.uberweal.BookRideTestSetup.*;
-import static com.samir.uberweal.BookRideTestSetup.setupBookRideCommandHandler;
+import static com.samir.uberweal.RideTestSetup.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RidePricingTest {
@@ -46,7 +45,7 @@ public class RidePricingTest {
 
         // Act
         underTest.handle(bookRideCommand);
-        Ride bookedRide = rideRepository.findAll().get(0);
+        Ride bookedRide = LIST_PAST_RIDES_DS_GATEWAY.findByRiderId(rider.getId()).get(0);
 
         // Assert
         assertEquals(expectedPrice, bookedRide.getPrice());

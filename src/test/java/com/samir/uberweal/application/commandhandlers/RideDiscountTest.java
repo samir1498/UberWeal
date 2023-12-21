@@ -12,8 +12,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.time.LocalDate;
 
-import static com.samir.uberweal.BookRideTestSetup.*;
-import static com.samir.uberweal.BookRideTestSetup.setupBookRideCommandHandler;
+import static com.samir.uberweal.RideTestSetup.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RideDiscountTest {
@@ -48,7 +47,7 @@ class RideDiscountTest {
 
         // Act
         underTest.handle(ride);
-        Ride bookedRide = rideRepository.findAll().get(0);
+        Ride bookedRide = LIST_PAST_RIDES_DS_GATEWAY.findByRiderId(rider.getId()).get(0);
 
         // Assert
         assertEquals(cost / 2, bookedRide.getPrice());
@@ -80,7 +79,7 @@ class RideDiscountTest {
 
         // Act
         underTest.handle(ride);
-        Ride bookedRide = rideRepository.findAll().get(0);
+        Ride bookedRide = LIST_PAST_RIDES_DS_GATEWAY.findByRiderId(rider.getId()).get(0);
         double price = bookedRide.getPrice();
         // Assert
         assertEquals(cost - 5, price);
