@@ -24,12 +24,8 @@ target/
 .vscode/
 
 # Ignore build artifacts
-/bin/
-/bin/.mvn/wrapper/maven-wrapper.jar
-/bin/.mvn/wrapper/maven-wrapper.properties
-/bin/mvnw
-/bin/mvnw.cmd
-/bin/pom.xml
+/bin/**
+
 
 # Ignore compiled Java classes
 /bin/**/*.class
