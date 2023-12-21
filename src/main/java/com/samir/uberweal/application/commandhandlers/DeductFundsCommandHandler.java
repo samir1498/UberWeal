@@ -3,18 +3,19 @@ package com.samir.uberweal.application.commandhandlers;
 import com.samir.uberweal.application.commands.DeductFundsCommand;
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.exceptions.InsufficientFundsException;
-import com.samir.uberweal.domain.exceptions.RiderNotFoundException;
-import com.samir.uberweal.domain.repositories.RiderRepository;
-import lombok.AllArgsConstructor;
+import com.samir.uberweal.domain.gateways.RiderDsGateway;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class DeductFundsCommandHandler {
 
-    private final RiderRepository repository;
+
+    private final RiderDsGateway repository;
 
     public void handle(DeductFundsCommand command) {
-        Rider rider = repository.findRiderById(command.riderId())
-                .orElseThrow(() -> new RiderNotFoundException("Rider not found with ID: " + command.riderId()));
+        Rider rider = repository.findRiderById(command.riderId());
 
         double updatedBalance = rider.getFunds() - command.amount();
 
