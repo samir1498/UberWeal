@@ -2,8 +2,8 @@ package com.samir.uberweal.application.commandhandlers;
 
 import com.samir.uberweal.application.commands.DeductFundsCommand;
 import com.samir.uberweal.domain.entities.Rider;
-import com.samir.uberweal.domain.repositories.RiderRepository;
-import com.samir.uberweal.domain.repositories.stubs.RiderRepositoryStub;
+import com.samir.uberweal.domain.gateways.RiderDsGateway;
+import com.samir.uberweal.domain.gateways.stubs.RiderDsGatewayStub;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,15 +20,15 @@ class RiderDeductFundsTest {
 
     @BeforeEach
     void setUp() {
-        RiderRepository riderRepository = new RiderRepositoryStub();
-        underTest = new DeductFundsCommandHandler(riderRepository);
+        RiderDsGateway riderDsGateway = new RiderDsGatewayStub();
+        underTest = new DeductFundsCommandHandler(riderDsGateway);
         rider = Rider
                 .builder()
                 .funds(100)
                 .id(1L)
                 .joinedAt(LocalDate.now())
                 .build();
-        riderRepository.save(rider);
+        riderDsGateway.save(rider);
     }
 
     @AfterEach

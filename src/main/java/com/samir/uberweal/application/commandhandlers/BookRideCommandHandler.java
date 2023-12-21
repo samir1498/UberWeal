@@ -1,23 +1,29 @@
 package com.samir.uberweal.application.commandhandlers;
 
+import com.samir.uberweal.adapters.dtos.RideDto;
 import com.samir.uberweal.application.commands.BookRideCommand;
 import com.samir.uberweal.domain.entities.ride.Ride;
+import com.samir.uberweal.domain.entities.ride.RideStatus;
 import com.samir.uberweal.domain.observers.RideCompletionObserver;
 import com.samir.uberweal.domain.observers.RideCompletionObserverImpl;
-import com.samir.uberweal.domain.repositories.RideRepository;
+import com.samir.uberweal.domain.gateways.BookRideDsGateway;
 import com.samir.uberweal.domain.services.pricing.RideChargeCalculatorFactory;
 import com.samir.uberweal.domain.services.pricing.calculator.RideChargeCalculator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
+import static com.samir.uberweal.adapters.dtos.ReMappers.RideToRideDto;
+
 @RequiredArgsConstructor
+@Service
 public class BookRideCommandHandler {
 
-    private final RideRepository rideRepository;
+    private final BookRideDsGateway bookRideDsGateway;
     private final RideChargeCalculatorFactory rideChargeCalculatorFactory;
 
-    public void handle(BookRideCommand command) {
+    public RideDto handle(BookRideCommand command) {
         Ride ride = createRideFromCommand(command);
         double price = calculateExpectedCharge(ride);
 
@@ -25,7 +31,8 @@ public class BookRideCommandHandler {
             ride.getRider().setVoucher(true);
         }
 
-        rideRepository.save(ride);
+        bookRideDsGateway.save(ride);
+        return RideToRideDto(ride);
     }
 
     private Ride createRideFromCommand(BookRideCommand command) {
@@ -34,9 +41,10 @@ public class BookRideCommandHandler {
        Ride ride = Ride.builder()
                .rideType(command.type())
                .rider(command.rider())
-               .startingPoint(command.riderLocation())
-               .destination(command.destination())
+               .startLocation(command.startLocation())
+               .endLocation(command.endLocation())
                .distance(command.distance())
+               .status(RideStatus.IN_PROGRESS)
                .build();
        ride.addObserver(completionObserver);
        return ride;
@@ -54,15 +62,12 @@ public class BookRideCommandHandler {
 
         ride.setPrice(baseCharge);
 
-        applyDiscount(ride);
+        applyFirstYearDiscount(ride);
+        applyDistanceDiscount(ride);
 
         return ride.getPrice();
     }
 
-    private void applyDiscount(Ride ride){
-        applyFirstYearDiscount(ride);
-        applyDistanceDiscount(ride);
-    }
     private void applyDistanceDiscount(Ride ride) {
         double distance = ride.getDistance();
         double price = ride.getPrice();

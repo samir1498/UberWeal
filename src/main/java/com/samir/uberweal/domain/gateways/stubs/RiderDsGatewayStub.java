@@ -1,13 +1,12 @@
-package com.samir.uberweal.domain.repositories.stubs;
+package com.samir.uberweal.domain.gateways.stubs;
 
 import com.samir.uberweal.domain.entities.Rider;
-import com.samir.uberweal.domain.repositories.RiderRepository;
+import com.samir.uberweal.domain.gateways.RiderDsGateway;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
-public class RiderRepositoryStub implements RiderRepository {
+public class RiderDsGatewayStub implements RiderDsGateway {
 
     private final Map<Long, Rider> riderDatabase = new HashMap<>();
     private long currentId = 1;
@@ -25,8 +24,8 @@ public class RiderRepositoryStub implements RiderRepository {
     }
 
     @Override
-    public Optional<Rider> findRiderById(Long id) {
+    public Rider findRiderById(Long id) {
         // Retrieve a Rider from the in-memory database by ID
-        return Optional.ofNullable(riderDatabase.get(id));
+        return riderDatabase.get(id);
     }
 }
