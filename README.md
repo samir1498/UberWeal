@@ -62,7 +62,7 @@ sequenceDiagram
 
 ### Project Structure
 
-The project follows the Clean Architecture principles with the following structure:
+The project follows the Clean Architecture principles, organizing code into distinct layers for improved maintainability and testability.
 
 ```
 src
@@ -103,10 +103,6 @@ src
                 └── command
                     └── handlers
 ```
-
-### Project Structure
-
-The project follows the Clean Architecture principles, organizing code into distinct layers for improved maintainability and testability.
 
 - **config:** Contains configuration classes for spring boot application.
 
