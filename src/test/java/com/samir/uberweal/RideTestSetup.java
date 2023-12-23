@@ -1,8 +1,8 @@
 package com.samir.uberweal;
 
-import com.samir.uberweal.application.commandhandlers.BookRideCommandHandler;
-import com.samir.uberweal.application.commands.BookRideCommand;
-import com.samir.uberweal.application.queryhandler.GetAllRidesQueryHandler;
+import com.samir.uberweal.application.command.handlers.BookRideCommandHandler;
+import com.samir.uberweal.application.command.commands.BookRideCommand;
+import com.samir.uberweal.application.query.handler.GetAllRidesQueryHandler;
 import com.samir.uberweal.domain.entities.Location;
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.entities.ride.RideType;

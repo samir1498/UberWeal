@@ -1,8 +1,8 @@
-package com.samir.uberweal.application.commandhandlers;
+package com.samir.uberweal.application.command.handlers;
 
 import com.samir.uberweal.adapters.dtos.RideDto;
-import com.samir.uberweal.application.queries.GetAllRidesQuery;
-import com.samir.uberweal.application.queryhandler.GetAllRidesQueryHandler;
+import com.samir.uberweal.application.query.queries.GetAllRidesQuery;
+import com.samir.uberweal.application.query.handler.GetAllRidesQueryHandler;
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.entities.Location;
 import com.samir.uberweal.domain.entities.ride.Ride;

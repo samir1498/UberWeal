@@ -3,7 +3,7 @@ package com.samir.uberweal.adapters.gateways;
 import com.samir.uberweal.domain.entities.Location;
 import com.samir.uberweal.domain.entities.ride.Ride;
 import com.samir.uberweal.domain.gateways.ListPastRidesDsGateway;
-import com.samir.uberweal.infrastructure.repositories.JpaRideRepository;
+import com.samir.uberweal.infrastructure.jpa.repositories.JpaRideRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

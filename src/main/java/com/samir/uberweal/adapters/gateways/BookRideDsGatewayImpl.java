@@ -2,7 +2,7 @@ package com.samir.uberweal.adapters.gateways;
 
 import com.samir.uberweal.domain.entities.ride.Ride;
 import com.samir.uberweal.domain.gateways.BookRideDsGateway;
-import com.samir.uberweal.infrastructure.repositories.JpaRideRepository;
+import com.samir.uberweal.infrastructure.jpa.repositories.JpaRideRepository;
 import lombok.RequiredArgsConstructor;
 
 import static com.samir.uberweal.adapters.dtos.ReMappers.rideToRideDataMapper;

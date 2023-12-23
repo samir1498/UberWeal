@@ -2,8 +2,8 @@ package com.samir.uberweal.adapters.dtos;
 
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.entities.ride.Ride;
-import com.samir.uberweal.infrastructure.JpaEntities.RideDataMapper;
-import com.samir.uberweal.infrastructure.JpaEntities.RiderDataMapper;
+import com.samir.uberweal.infrastructure.jpa.entities.RideDataMapper;
+import com.samir.uberweal.infrastructure.jpa.entities.RiderDataMapper;
 
 public class ReMappers {
     public static Rider riderDataMapperToRider(RiderDataMapper rider) {

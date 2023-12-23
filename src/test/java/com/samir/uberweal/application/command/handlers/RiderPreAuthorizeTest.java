@@ -1,7 +1,7 @@
-package com.samir.uberweal.application.commandhandlers;
+package com.samir.uberweal.application.command.handlers;
 
-import com.samir.uberweal.application.queries.PreAuthorizeQuery;
-import com.samir.uberweal.application.queryhandler.PreAuthorizeQueryHandler;
+import com.samir.uberweal.application.query.queries.PreAuthorizeQuery;
+import com.samir.uberweal.application.query.handler.PreAuthorizeQueryHandler;
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.exceptions.InsufficientFundsException;
 import com.samir.uberweal.domain.exceptions.RiderNotFoundException;

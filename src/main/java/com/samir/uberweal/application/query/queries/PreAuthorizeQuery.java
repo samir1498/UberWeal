@@ -1,4 +1,4 @@
-package com.samir.uberweal.application.queries;
+package com.samir.uberweal.application.query.queries;
 
 import com.samir.uberweal.domain.entities.Rider;
 

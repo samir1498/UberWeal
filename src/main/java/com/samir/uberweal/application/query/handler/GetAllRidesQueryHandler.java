@@ -1,8 +1,8 @@
-package com.samir.uberweal.application.queryhandler;
+package com.samir.uberweal.application.query.handler;
 
 import com.samir.uberweal.adapters.dtos.ReMappers;
 import com.samir.uberweal.adapters.dtos.RideDto;
-import com.samir.uberweal.application.queries.GetAllRidesQuery;
+import com.samir.uberweal.application.query.queries.GetAllRidesQuery;
 import com.samir.uberweal.domain.entities.ride.Ride;
 import com.samir.uberweal.domain.gateways.ListPastRidesDsGateway;
 import lombok.RequiredArgsConstructor;

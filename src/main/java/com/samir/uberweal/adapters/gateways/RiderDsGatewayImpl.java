@@ -3,8 +3,8 @@ package com.samir.uberweal.adapters.gateways;
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.exceptions.RiderNotFoundException;
 import com.samir.uberweal.domain.gateways.RiderDsGateway;
-import com.samir.uberweal.infrastructure.repositories.JpaRiderRepository;
-import com.samir.uberweal.infrastructure.JpaEntities.RiderDataMapper;
+import com.samir.uberweal.infrastructure.jpa.repositories.JpaRiderRepository;
+import com.samir.uberweal.infrastructure.jpa.entities.RiderDataMapper;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;

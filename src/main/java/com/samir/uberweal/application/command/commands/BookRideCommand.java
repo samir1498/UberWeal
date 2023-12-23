@@ -1,4 +1,4 @@
-package com.samir.uberweal.application.commands;
+package com.samir.uberweal.application.command.commands;
 
 import com.samir.uberweal.domain.entities.Location;
 import com.samir.uberweal.domain.entities.Rider;

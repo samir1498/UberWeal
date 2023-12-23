@@ -1,7 +1,7 @@
-package com.samir.uberweal.application.commandhandlers;
+package com.samir.uberweal.application.command.handlers;
 
 import com.samir.uberweal.adapters.dtos.RideDto;
-import com.samir.uberweal.application.commands.BookRideCommand;
+import com.samir.uberweal.application.command.commands.BookRideCommand;
 import com.samir.uberweal.domain.entities.ride.Ride;
 import com.samir.uberweal.domain.entities.ride.RideStatus;
 import com.samir.uberweal.domain.observers.RideCompletionObserver;
