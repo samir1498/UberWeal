@@ -13,9 +13,10 @@ UberWeal SAAS is a ride-hailing application that allows Riders to request driver
 
 As a Rider, I want to book a Driver that can take me to my destination, providing an efficient alternative to public transport.
 
-### List all my past races
+### List all my past rides
 
-As a Rider, I would like to list all the history of my races with mention of the respective Drivers, enabling me to track my ride history.
+As a Rider, I would like to l
+ist all the history of my rides with mention of the respective Drivers, enabling me to track my ride history.
 
 ## Pricing Rules
 
@@ -103,8 +104,6 @@ src
                     └── handlers
 ```
 
-Certainly! Here's the updated folder structure description:
-
 ### Project Structure
 
 The project follows the Clean Architecture principles, organizing code into distinct layers for improved maintainability and testability.
@@ -126,31 +125,30 @@ The project follows the Clean Architecture principles, organizing code into dist
     - **handlers:** Implements handlers for processing query-related operations.
 
 - **domain:**
-  - **entities:** Contains classes representing core business entities like drivers, riders, and rides.
+  - **entities:** Contains classes representing core business entities like riders, and rides.
   - **exceptions:** Custom exception classes for handling specific scenarios.
   - **gateways:** Interfaces and stub implementations for interacting with external systems.
   - **observers:** Classes related to observing or reacting to specific events.
   - **services:**
     - **pricing:**
-      - **calculator:** Classes for calculating ride charges.
+      - **calculator:** Classes for calculating ride charges (using strategy pattern).
       - **strategies:** Strategies for different pricing scenarios.
 
 - **infrastructure:**
   - **jpa:**
     - **entities:** Classes for mapping data between Java objects and a relational database.
     - **repositories:** Interfaces for database interactions.
-  - **repositories:** Implementations of data gateways for interacting with external systems.
 
 ## Dependencies
 
 The project uses [Maven](https://maven.apache.org/) as the build tool.
 
-## Maven Wrapper
-### What is Maven Wrapper?
+### Maven Wrapper
+#### What is Maven Wrapper?
 
 [Maven Wrapper](https://github.com/takari/maven-wrapper) is a mechanism that allows a Maven project to be built, executed, and developed with a predefined Maven version. This means users don't have to install Maven globally on their systems.
 
-### Using Maven Without Installation
+#### Using Maven Without Installation
 
 1. Navigate to the project's root directory in the terminal.
 
@@ -178,11 +176,11 @@ The project uses [Maven](https://maven.apache.org/) as the build tool.
 
 These commands use the Maven Wrapper (`mvnw` or `mvnw.cmd`) to build and run the Spring project. The `spring-boot:run` goal is specific to Spring Boot applications and simplifies the process by automatically packaging and running the application.
 
-# Testing
+## Testing
 
 Test cases are provided to ensure the correctness of the implemented use cases.
 
-## Running the Tests
+### Running the Tests
 
 To run the tests using Maven, execute the following command:
 
