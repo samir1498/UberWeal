@@ -19,13 +19,14 @@ public class RiderDsGatewayImpl implements RiderDsGateway {
     }
 
     @Override
-    public Rider findRiderById(Long id) {
+    public Rider findRiderById(Long id) throws RiderNotFoundException {
 
-        Optional<RiderDataMapper> rider = repository.findById(id);
+        Optional<RiderDataMapper> riderDs = repository.findById(id);
 
-        return riderDataMapperToRider(rider.orElseThrow(
+        RiderDataMapper rider = riderDs.orElseThrow(
                 () -> new RiderNotFoundException("Rider not found with ID: " + id)
-        ));
+        );
+        return riderDataMapperToRider(rider);
     }
 
 
