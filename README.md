@@ -38,26 +38,40 @@ src
 ├── main
 │   ├── java
 │   │   └── com.samir.uberweal
-│   │       ├── core
-│   │       │   ├── domain
-│   │       │   └── usecases
-│   │       ├── infrastructure
-│   │       └── interfaces
-│   │           ├── controllers
-│   │           ├── presenters
-│   │           └── gateways
+│   │       ├── config
+│   │       ├── adapters
+│   │       │   ├── controllers
+│   │       │   ├── dtos
+│   │       │   ├── gateways
+│   │       │   └── presenters
+│   │       ├── application
+│   │       │   ├── command
+│   │       │   │   ├── commands
+│   │       │   │   └── handlers
+│   │       │   │
+│   │       │   └── query
+│   │       │       ├── queries
+│   │       │       └── handlers
+│   │       ├── domain
+│   │       │   ├── entities
+│   │       │   ├── exceptions
+│   │       │   ├── gateways
+│   │       │   └── observers
+│   │       │   └── services
+│   │       │       └── pricing
+│   │       └── infrastructure
+│   │           ├── jpa
+│   │           │   ├── entities
+│   │           │   └── repositories
+│   │           └── repositories
 │   └── resources
 └── test
-    ├── java
-    │   └── com.samir.uberweal
-    │       ├── core
-    │       │   └── usecases
-    │       ├── infrastructure
-    │       └── interfaces
-    │           ├── controllers
-    │           ├── presenters
-    │           └── gateways
-    └── resources
+    └── java
+        └── com.samir.uberweal
+            └── application
+                └── command
+                    └── handlers
+
 
 ```
 
