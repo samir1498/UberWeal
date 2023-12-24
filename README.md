@@ -66,74 +66,20 @@ The project follows the Clean Architecture principles, organizing code into dist
 
 ```
 src
-├── main
-│   ├── java
-│   │   └── com.samir.uberweal
-│   │       ├── config
-│   │       ├── adapters
-│   │       │   ├── controllers
-│   │       │   ├── dtos
-│   │       │   ├── gateways
-│   │       │   └── presenters
-│   │       ├── application
-│   │       │   ├── command
-│   │       │   │   ├── commands
-│   │       │   │   └── handlers
-│   │       │   │
-│   │       │   └── query
-│   │       │       ├── queries
-│   │       │       └── handlers
-│   │       ├── domain
-│   │       │   ├── entities
-│   │       │   ├── exceptions
-│   │       │   ├── gateways
-│   │       │   └── observers
-│   │       │   └── services
-│   │       │       └── pricing
-│   │       └── infrastructure
-│   │           ├── jpa
-│   │           │   ├── entities
-│   │           │   └── repositories
-│   │           └── repositories
-│   └── resources
-└── test
+└── main
     └── java
         └── com.samir.uberweal
-            └── application
-                └── command
-                    └── handlers
+            ├── adapters
+            ├── application
+            ├── domain
+            └── infrastructure
 ```
 
-- **config:** Contains configuration classes for spring boot application.
 
-- **adapters:**
-  - **controllers:** Handles interactions with the user interface, specifically ride-related operations.
-  - **dtos:** Data Transfer Objects used for transferring data between layers.
-  - **gateways:** Implements interactions with external systems or services.
-  - **presenters:** Classes related to presenting data or formatting output.
-
-- **application:**
-  - **command:**
-    - **commands:** Defines command objects representing user requests.
-    - **handlers:** Implements handlers for processing command-related operations.
-  - **query:**
-    - **queries:** Defines query objects representing user queries.
-    - **handlers:** Implements handlers for processing query-related operations.
-
-- **domain:**
-  - **entities:** Contains classes representing core business entities like riders, and rides.
-  - **exceptions:** Custom exception classes for handling specific scenarios.
-  - **gateways:** Interfaces and stub implementations for interacting with external systems.
-  - **observers:** Classes related to observing or reacting to specific events.
-  - **services:**
-    - **pricing:**
-      - **calculator:** Classes for calculating ride charges (using strategy pattern).
-      - **strategies:** Strategies for different pricing scenarios.
-
-- **infrastructure:**
-  - **jpa:**
-    - **entities:** Classes for mapping data between Java objects and a relational database.
-    - **repositories:** Interfaces for database interactions.
+- **adapters:** Contains the delivery mechanisms like controllers, presenters, and gateways.
+- **application:** Contains use case implementations and business rules orchestration.
+- **domain:** Holds the business entities and domain specific logic.
+- **infrastructure:** Deals with external concerns, such as databases or external services.
 
 ## Dependencies
 
