@@ -1,22 +1,27 @@
-package com.samir.uberweal.domain.entities.ride;
-
-import com.samir.uberweal.domain.entities.Driver;
+package com.samir.uberweal.domain.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.samir.uberweal.domain.entities.Rider;
-import com.samir.uberweal.domain.entities.Location;
 import com.samir.uberweal.domain.observers.RideCompletionObserver;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class Ride {
+public class BookRide {
+
+    public enum RideStatus {
+        COMPLETED,
+        IN_PROGRESS
+    }
+    public enum RideType {
+        JOURNEY,
+        TRIP
+    }
+
     private Long id;
     private final Rider rider;
-    private final Driver driver;
     private final Location endLocation;
     private final Location startLocation;
     private final RideType rideType;
