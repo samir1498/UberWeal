@@ -2,7 +2,7 @@ package com.samir.uberweal.application.query.handler;
 
 import com.samir.uberweal.application.query.queries.GetRiderQuery;
 import com.samir.uberweal.domain.entities.Rider;
-import com.samir.uberweal.domain.gateways.RiderDsGateway;
+import com.samir.uberweal.adapters.gateways.RiderDsGateway;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

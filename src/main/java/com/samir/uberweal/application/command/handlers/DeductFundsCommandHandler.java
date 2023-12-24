@@ -3,7 +3,7 @@ package com.samir.uberweal.application.command.handlers;
 import com.samir.uberweal.application.command.commands.DeductFundsCommand;
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.exceptions.InsufficientFundsException;
-import com.samir.uberweal.domain.gateways.RiderDsGateway;
+import com.samir.uberweal.adapters.gateways.RiderDsGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -2,8 +2,8 @@ package com.samir.uberweal.application.command.handlers;
 
 import com.samir.uberweal.application.command.commands.DeductFundsCommand;
 import com.samir.uberweal.domain.entities.Rider;
-import com.samir.uberweal.domain.gateways.RiderDsGateway;
-import com.samir.uberweal.domain.gateways.stubs.RiderDsGatewayStub;
+import com.samir.uberweal.adapters.gateways.RiderDsGateway;
+import com.samir.uberweal.adapters.gateways.stubs.RiderDsGatewayStub;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -3,7 +3,7 @@ package com.samir.uberweal.application.query.handler;
 import com.samir.uberweal.application.query.queries.PreAuthorizeQuery;
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.exceptions.InsufficientFundsException;
-import com.samir.uberweal.domain.gateways.RiderDsGateway;
+import com.samir.uberweal.adapters.gateways.RiderDsGateway;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
