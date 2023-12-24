@@ -1,14 +1,14 @@
-package com.samir.uberweal.adapters.gateways;
+package com.samir.uberweal.infrastructure.gateways;
 
 import com.samir.uberweal.domain.entities.Location;
-import com.samir.uberweal.domain.entities.ride.Ride;
-import com.samir.uberweal.domain.gateways.ListPastRidesDsGateway;
+import com.samir.uberweal.domain.entities.Rider;
+import com.samir.uberweal.domain.entities.BookRide;
+import com.samir.uberweal.adapters.gateways.ListPastRidesDsGateway;
+import com.samir.uberweal.infrastructure.jpa.entities.RiderDataMapper;
 import com.samir.uberweal.infrastructure.jpa.repositories.JpaRideRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-
-import static com.samir.uberweal.adapters.dtos.ReMappers.riderDataMapperToRider;
 
 @RequiredArgsConstructor
 public class ListPastRidesDsGatewayImpl implements ListPastRidesDsGateway {
@@ -17,9 +17,9 @@ public class ListPastRidesDsGatewayImpl implements ListPastRidesDsGateway {
 
 
     @Override
-    public List<Ride> findByRiderId(Long riderId) {
+    public List<BookRide> findByRiderId(Long riderId) {
         return repository.findByRiderId(riderId).stream()
-                .map(r ->  Ride.builder()
+                .map(r ->  BookRide.builder()
                             .id(r.getId())
                             .rider(riderDataMapperToRider(r.getRider()))
                             .startLocation(new Location(r.getStartLocation()))
@@ -28,6 +28,16 @@ public class ListPastRidesDsGatewayImpl implements ListPastRidesDsGateway {
                             .build()
                 ).toList();
     }
+
+    private Rider riderDataMapperToRider(RiderDataMapper rider) {
+        return Rider.builder()
+                .id(rider.getId())
+                .funds(rider.getFunds())
+                .name(rider.getName())
+                .joinedAt(rider.getJoinedAt())
+                .build();
+    }
+
 
 
 }
