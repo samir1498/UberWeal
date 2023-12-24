@@ -1,4 +1,4 @@
-package com.samir.uberweal.domain.gateways;
+package com.samir.uberweal.adapters.gateways;
 
 import com.samir.uberweal.domain.entities.Rider;
 

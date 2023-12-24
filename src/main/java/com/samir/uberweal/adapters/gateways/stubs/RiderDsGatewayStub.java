@@ -1,8 +1,8 @@
-package com.samir.uberweal.domain.gateways.stubs;
+package com.samir.uberweal.adapters.gateways.stubs;
 
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.exceptions.RiderNotFoundException;
-import com.samir.uberweal.domain.gateways.RiderDsGateway;
+import com.samir.uberweal.adapters.gateways.RiderDsGateway;
 
 import java.util.HashMap;
 import java.util.Map;
