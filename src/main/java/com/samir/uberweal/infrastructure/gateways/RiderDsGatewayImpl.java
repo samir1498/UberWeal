@@ -1,8 +1,8 @@
-package com.samir.uberweal.adapters.gateways;
+package com.samir.uberweal.infrastructure.gateways;
 
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.exceptions.RiderNotFoundException;
-import com.samir.uberweal.domain.gateways.RiderDsGateway;
+import com.samir.uberweal.adapters.gateways.RiderDsGateway;
 import com.samir.uberweal.infrastructure.jpa.repositories.JpaRiderRepository;
 import com.samir.uberweal.infrastructure.jpa.entities.RiderDataMapper;
 import lombok.RequiredArgsConstructor;
