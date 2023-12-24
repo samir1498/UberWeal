@@ -3,8 +3,7 @@ package com.samir.uberweal.application.command.handlers;
 import com.samir.uberweal.application.command.commands.BookRideCommand;
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.entities.Location;
-import com.samir.uberweal.domain.entities.ride.Ride;
-import com.samir.uberweal.domain.entities.ride.RideType;
+import com.samir.uberweal.domain.entities.BookRide;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,7 +34,7 @@ public class RidePricingTest {
     @DisplayName("It Should Apply Correct Price")
 
     void itShould_ApplyCorrectPrice(
-            RideType type,
+            BookRide.RideType type,
             double expectedPrice,
             Location startPoint,
             Location destination
@@ -45,7 +44,7 @@ public class RidePricingTest {
 
         // Act
         underTest.handle(bookRideCommand);
-        Ride bookedRide = LIST_PAST_RIDES_DS_GATEWAY.findByRiderId(rider.getId()).get(0);
+        BookRide bookedRide = LIST_PAST_RIDES_DS_GATEWAY.findByRiderId(rider.getId()).get(0);
 
         // Assert
         assertEquals(expectedPrice, bookedRide.getPrice());

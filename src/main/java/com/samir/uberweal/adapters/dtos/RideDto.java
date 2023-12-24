@@ -1,7 +1,6 @@
 package com.samir.uberweal.adapters.dtos;
 
-import com.samir.uberweal.domain.entities.ride.RideStatus;
-import com.samir.uberweal.domain.entities.ride.RideType;
+import com.samir.uberweal.domain.entities.BookRide;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,6 +13,16 @@ public class RideDto {
     private String endLocation;
     private double price;
     private double distance;
-    private RideStatus status;
-    private RideType type;
+    private String status;
+    private String type;
+
+    public static RideDto RideToRideDto(BookRide ride) {
+        return RideDto.builder()
+                .type(ride.getRideType().name())
+                .riderName(ride.getRider().getName())
+                .status(ride.getStatus().name())
+                .startLocation(ride.getStartLocation().getName())
+                .endLocation(ride.getEndLocation().getName())
+                .build();
+    }
 }

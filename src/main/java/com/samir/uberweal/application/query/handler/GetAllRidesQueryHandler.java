@@ -1,10 +1,9 @@
 package com.samir.uberweal.application.query.handler;
 
-import com.samir.uberweal.adapters.dtos.ReMappers;
 import com.samir.uberweal.adapters.dtos.RideDto;
 import com.samir.uberweal.application.query.queries.GetAllRidesQuery;
-import com.samir.uberweal.domain.entities.ride.Ride;
-import com.samir.uberweal.domain.gateways.ListPastRidesDsGateway;
+import com.samir.uberweal.domain.entities.BookRide;
+import com.samir.uberweal.adapters.gateways.ListPastRidesDsGateway;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -16,13 +15,13 @@ public class GetAllRidesQueryHandler {
     private final ListPastRidesDsGateway listPastRidesDsGateway;
 
     public List<RideDto> handle(GetAllRidesQuery getAllRidesQuery) {
-        List<Ride> rides = listPastRidesDsGateway.findByRiderId(getAllRidesQuery.riderId());
+        List<BookRide> rides = listPastRidesDsGateway.findByRiderId(getAllRidesQuery.riderId());
         return mapToRideDtoList(rides);
     }
 
-    private List<RideDto> mapToRideDtoList(List<Ride> rides) {
+    private List<RideDto> mapToRideDtoList(List<BookRide> rides) {
         return rides.stream()
-                .map(ReMappers::RideToRideDto)
+                .map(RideDto::RideToRideDto)
                 .collect(Collectors.toList());
     }
 }

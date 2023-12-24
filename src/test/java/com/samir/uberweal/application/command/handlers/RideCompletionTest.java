@@ -3,9 +3,7 @@ package com.samir.uberweal.application.command.handlers;
 import com.samir.uberweal.application.command.commands.BookRideCommand;
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.entities.Location;
-import com.samir.uberweal.domain.entities.ride.Ride;
-import com.samir.uberweal.domain.entities.ride.RideStatus;
-import com.samir.uberweal.domain.entities.ride.RideType;
+import com.samir.uberweal.domain.entities.BookRide;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,7 +30,7 @@ class RideCompletionTest {
     })
     @DisplayName("It Should Charge rider When Ride Is Complete")
     void itShould_ChargeRider_WhenRideIsComplete(
-            RideType type,
+            BookRide.RideType type,
             Location startPoint,
             Location destination,
             double expectedCharge
@@ -43,14 +41,14 @@ class RideCompletionTest {
         underTest.handle(bookRideCommand);
 
         // Act
-        Ride ride = LIST_PAST_RIDES_DS_GATEWAY.findByRiderId(rider.getId()).get(0);
+        BookRide ride = LIST_PAST_RIDES_DS_GATEWAY.findByRiderId(rider.getId()).get(0);
         ride.completeRide();
 
         // Assert
         double finalFunds = rider.getFunds();
 
         assertEquals(initialFunds - expectedCharge, finalFunds);
-        assertEquals(RideStatus.COMPLETED, ride.getStatus());
+        assertEquals(BookRide.RideStatus.COMPLETED, ride.getStatus());
     }
 
 

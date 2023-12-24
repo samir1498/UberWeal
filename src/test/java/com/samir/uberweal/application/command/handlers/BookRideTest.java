@@ -1,8 +1,8 @@
 package com.samir.uberweal.application.command.handlers;
 
+import com.samir.uberweal.domain.entities.BookRide;
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.entities.Location;
-import com.samir.uberweal.domain.entities.ride.RideType;
 import com.samir.uberweal.application.command.commands.BookRideCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +31,7 @@ class BookRideTest {
     })
     @DisplayName("Book a Ride")
     void itShould_bookRide(
-            RideType type,
+            BookRide.RideType type,
             Location startPoint,
             Location destination
     ) {
