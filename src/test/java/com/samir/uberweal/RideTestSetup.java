@@ -1,18 +1,20 @@
 package com.samir.uberweal;
 
-import com.samir.uberweal.application.commandhandlers.BookRideCommandHandler;
-import com.samir.uberweal.application.commands.BookRideCommand;
-import com.samir.uberweal.application.queryhandler.GetAllRidesQueryHandler;
+import com.samir.uberweal.application.command.handlers.BookRideCommandHandler;
+import com.samir.uberweal.application.command.commands.BookRideCommand;
+import com.samir.uberweal.application.query.handler.GetAllRidesQueryHandler;
+import com.samir.uberweal.domain.entities.BookRide;
 import com.samir.uberweal.domain.entities.Location;
 import com.samir.uberweal.domain.entities.Rider;
-import com.samir.uberweal.domain.entities.ride.RideType;
-import com.samir.uberweal.domain.gateways.BookRideDsGateway;
-import com.samir.uberweal.domain.gateways.ListPastRidesDsGateway;
-import com.samir.uberweal.domain.gateways.stubs.BookRideDsGatewayStub;
-import com.samir.uberweal.domain.gateways.stubs.ListPastRidesDsGatewayStub;
+import com.samir.uberweal.adapters.gateways.BookRideDsGateway;
+import com.samir.uberweal.adapters.gateways.ListPastRidesDsGateway;
+import com.samir.uberweal.adapters.gateways.stubs.BookRideDsGatewayStub;
+import com.samir.uberweal.adapters.gateways.stubs.ListPastRidesDsGatewayStub;
+import com.samir.uberweal.domain.services.discount.DiscountService;
 import com.samir.uberweal.domain.services.pricing.RideChargeCalculatorFactory;
-import com.samir.uberweal.domain.services.pricing.strategies.JourneyRideChargeCalculator;
-import com.samir.uberweal.domain.services.pricing.strategies.TripRideChargeCalculator;
+import com.samir.uberweal.domain.services.pricing.FinalChargeCalculator;
+import com.samir.uberweal.domain.services.pricing.strategies.JourneyChargeCalculator;
+import com.samir.uberweal.domain.services.pricing.strategies.TripChargeCalculator;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -32,16 +34,24 @@ public class RideTestSetup {
     }
 
     public static BookRideCommandHandler setupBookRideCommandHandler() {
-        TripRideChargeCalculator tripRideChargeCalculator = new TripRideChargeCalculator();
-        JourneyRideChargeCalculator journeyRideChargeCalculator = new JourneyRideChargeCalculator();
-        RideChargeCalculatorFactory rideChargeCalculatorFactory = new RideChargeCalculatorFactory(tripRideChargeCalculator, journeyRideChargeCalculator);
+        return new BookRideCommandHandler(BOOK_RIDE_DS_GATEWAY, setupPriceCalculator(setupCalculatorFactory()));
+    }
 
-        return new BookRideCommandHandler(BOOK_RIDE_DS_GATEWAY, rideChargeCalculatorFactory);
+    private static RideChargeCalculatorFactory setupCalculatorFactory() {
+        TripChargeCalculator tripChargeCalculator = new TripChargeCalculator();
+        JourneyChargeCalculator journeyChargeCalculator = new JourneyChargeCalculator();
+
+        return new RideChargeCalculatorFactory(tripChargeCalculator, journeyChargeCalculator);
+    }
+
+    private static FinalChargeCalculator setupPriceCalculator(RideChargeCalculatorFactory rideChargeCalculatorFactory) {
+        DiscountService discountService = new DiscountService();
+        return new FinalChargeCalculator(discountService, rideChargeCalculatorFactory);
     }
 
     public static BookRideCommand buildBookRideCommand(
             Rider rider,
-            RideType type,
+            BookRide.RideType type,
             Location startPoint,
             Location destination,
             double distance

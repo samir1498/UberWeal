@@ -1,30 +1,27 @@
 package com.samir.uberweal.domain.services.pricing;
 
-import com.samir.uberweal.domain.entities.ride.RideType;
-import com.samir.uberweal.domain.services.pricing.calculator.RideChargeCalculator;
-import com.samir.uberweal.domain.services.pricing.strategies.JourneyRideChargeCalculator;
-import com.samir.uberweal.domain.services.pricing.strategies.TripRideChargeCalculator;
+import com.samir.uberweal.domain.entities.BookRide;
+import com.samir.uberweal.domain.services.pricing.strategies.RideChargeCalculator;
+import com.samir.uberweal.domain.services.pricing.strategies.JourneyChargeCalculator;
+import com.samir.uberweal.domain.services.pricing.strategies.TripChargeCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-@Component
 public class RideChargeCalculatorFactory {
-    private final Map<RideType, RideChargeCalculator> chargeCalculators;
-
+    private final Map<BookRide.RideType, RideChargeCalculator> chargeCalculators;
     @Autowired
     public RideChargeCalculatorFactory(
-            TripRideChargeCalculator tripRideChargeCalculator,
-            JourneyRideChargeCalculator journeyRideChargeCalculator
+            TripChargeCalculator tripChargeCalculator,
+            JourneyChargeCalculator journeyChargeCalculator
     ) {
         chargeCalculators = Map.of(
-                RideType.TRIP, tripRideChargeCalculator,
-                RideType.JOURNEY, journeyRideChargeCalculator
+                BookRide.RideType.TRIP, tripChargeCalculator,
+                BookRide.RideType.JOURNEY, journeyChargeCalculator
         );
     }
 
-    public RideChargeCalculator getRideChargeCalculator(RideType rideType) {
+    public RideChargeCalculator getRideChargeCalculator(BookRide.RideType rideType) {
         return chargeCalculators.get(rideType);
     }
 }
