@@ -1,8 +1,8 @@
 package com.samir.uberweal.application.command.commands;
 
+import com.samir.uberweal.domain.entities.BookRide;
 import com.samir.uberweal.domain.entities.Location;
 import com.samir.uberweal.domain.entities.Rider;
-import com.samir.uberweal.domain.entities.ride.RideType;
 import lombok.Builder;
 
 @Builder
@@ -11,6 +11,6 @@ public record BookRideCommand(
         Location startLocation,
         Location endLocation,
         double distance,
-        RideType type
+        BookRide.RideType type
 ) {
 }
