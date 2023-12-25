@@ -1,4 +1,4 @@
-package com.samir.uberweal.infrastructure.jpa.entities;
+package com.samir.uberweal.infrastructure.database.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

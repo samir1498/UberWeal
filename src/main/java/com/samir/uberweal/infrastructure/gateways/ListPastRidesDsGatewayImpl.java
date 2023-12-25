@@ -4,8 +4,8 @@ import com.samir.uberweal.domain.entities.Location;
 import com.samir.uberweal.domain.entities.Rider;
 import com.samir.uberweal.domain.entities.BookRide;
 import com.samir.uberweal.adapters.gateways.ListPastRidesDsGateway;
-import com.samir.uberweal.infrastructure.jpa.entities.RiderDataMapper;
-import com.samir.uberweal.infrastructure.jpa.repositories.JpaRideRepository;
+import com.samir.uberweal.infrastructure.database.entities.RiderDataMapper;
+import com.samir.uberweal.infrastructure.database.repositories.JpaRideRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.samir.uberweal.infrastructure.jpa.repositories;
+package com.samir.uberweal.infrastructure.database.repositories;
 
-import com.samir.uberweal.infrastructure.jpa.entities.RideDataMapper;
+import com.samir.uberweal.infrastructure.database.entities.RideDataMapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
