@@ -30,15 +30,6 @@ ist all the history of my rides with mention of the respective Drivers, enabling
 
 ## System Overview
 
-### Class Hierarchy
-
-```mermaid
-classDiagram
-  class Rider 
-  class Ride
-  Rider -- Ride: book a Ride
-
-```
 ### Sequence Diagram
 ```mermaid
 sequenceDiagram
